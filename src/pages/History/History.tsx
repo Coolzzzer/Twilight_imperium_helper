@@ -23,9 +23,6 @@ export const History: React.FC = () => {
           throw new Error(`Ошибка при получении истории: ${response.statusText}`);
         }
         const data: HistoryResponse[] = await response.json();
-        data.sort(
-                (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
-        );
         setHistory(data);
       } catch (err: any) {
         console.error(err);

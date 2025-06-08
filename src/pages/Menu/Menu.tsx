@@ -7,17 +7,21 @@ export const Menu = () =>{
                 <NavLink to='/main'>	
                     main 
                 </NavLink>
-                <NavLink to='/result'>
-                    result
-                </NavLink>
+                <br></br>
                 <NavLink to='/info'>
                     info
                 </NavLink>
-                <NavLink to='/winrate'>
-                    winrate
+                <br></br>
+                <NavLink to='/statistics'>
+                    statistics
                 </NavLink>
+                <br></br>
                 <NavLink to='/history'>
                     history
+                </NavLink>
+                <br></br>
+                <NavLink to='/inputfield'>
+                    inputfield
                 </NavLink>
             </div>
             <div>
