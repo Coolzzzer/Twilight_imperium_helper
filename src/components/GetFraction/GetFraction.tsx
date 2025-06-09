@@ -14,26 +14,22 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchAllFactions() {
+    async function fetchFactionById() {
       try {
-        const response = await fetch("http://localhost:5000/initial");
+        const response = await fetch(`http://localhost:5000/initial/${props.id}`);
         if (!response.ok) {
-          throw new Error(`Ошибка при получении списка фракций: ${response.statusText}`);
+          throw new Error(`Ошибка при получении фракции: ${response.statusText}`);
         }
-        const data: FactionResponse[] = await response.json();
-        const foundFaction = data.find((f) => f.id === props.id);
-        if (!foundFaction) {
-          throw new Error("Фракция с указанным id не найдена");
-        }
-        setFaction(foundFaction);
+        const data: FactionResponse = await response.json();
+        setFaction(data);
       } catch (err: any) {
         setError(err.message);
-        console.error(err);
+        console.error("Ошибка загрузки фракции:", err);
       } finally {
         setLoading(false);
       }
     }
-    fetchAllFactions();
+    fetchFactionById();
   }, [props.id]);
 
   if (loading) {
@@ -42,7 +38,7 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
   if (error) {
     return <p>{error}</p>;
   }
-  
+
   return (
     <>
       {faction && (
@@ -58,4 +54,3 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
     </>
   );
 };
-

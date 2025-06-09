@@ -25,6 +25,27 @@ export const AddObject = () => {
     };
 
     const handleSave = async () => {
+        if (!date) {
+            alert("Выберите дату!");
+            return;
+        }
+        if (!quantity || quantity < 1) {
+            alert("Введите количество игроков!");
+            return;
+        }
+        if (players.some((player) => !player.player.trim())) {
+            alert("Заполните имена всех игроков!");
+            return;
+        }
+        if (players.some((player) => player.fraction === null)) {
+            alert("Выберите фракцию для каждого игрока!");
+            return;
+        }
+        if (!players.some((player) => player.result)) {
+            alert("Выберите хотя бы одного победителя!");
+            return;
+        }
+        
         const requestData = { date, quantity, set: players };
 
         try {
