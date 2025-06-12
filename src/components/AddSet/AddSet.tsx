@@ -49,18 +49,14 @@ export const AddSet: React.FC<AddSetItem> = ({ selectedItem, setSelectedItem, ch
                         key={item}
                         onClick={() => handleSelect(item)}
                         style={{
-                            padding: "10px",
                             cursor: "pointer",
                             borderBottom: "1px solid #eee",
-                        }}
-                    >
-                        <GetFraction id={item} img={false} name={true} />
+                        }}               >
+                        <GetFraction id={item} img={true} name={true} />
                     </li>
                 ))}
             </ul>
         )}
-
-        {/* Чекбокс для результата */}
         <label>
             <input 
                 type="checkbox" 

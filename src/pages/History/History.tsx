@@ -4,7 +4,7 @@ import { GetFraction } from "../../components/GetFraction/GetFraction";
 import { DeleteObject } from "../../components/DeleteObject/DeleteObject";
 
 type HistoryResponse = {
-  id: string; // Теперь `id` - уникальный идентификатор
+  id: string;
   date: string; 
   quantity: number;
   set: {
@@ -36,6 +36,7 @@ export const History: React.FC = () => {
 
   return (
     <div className={HistoryStyle.container}>
+
       {history.length > 0 ? (
         history.map((item) => {
           const winners = item.set.filter((player) => player.result);

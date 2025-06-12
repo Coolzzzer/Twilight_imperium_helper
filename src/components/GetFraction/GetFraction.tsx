@@ -3,7 +3,7 @@ import type { FactionResponse } from "../../Hooks/useInfoFaction";
 import GetFractionStyle from "./GetFraction.module.css";
 
 type GetFractionProps = {
-  id: number;
+  id: any;
   img: boolean;
   name: boolean;
 };
@@ -12,7 +12,7 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
   const [faction, setFaction] = useState<FactionResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  
   useEffect(() => {
     async function fetchFactionById() {
       try {
@@ -44,7 +44,7 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
       {faction && (
         <>
           {props.img && (
-            <img src={faction.srcLogo} width="20vh" alt={faction.name} />
+            <img src={faction.srcLogo}  height="20vw" alt={faction.name} />
           )}
           {props.name && (
             <span>{faction.name}</span>
