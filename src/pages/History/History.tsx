@@ -18,6 +18,7 @@ export const History: React.FC = () => {
   const [history, setHistory] = useState<HistoryResponse[]>([]);
   const [expanded, setExpanded] = useState<string | null>(null);
 
+
   useEffect(() => {
     async function fetchHistory() {
       try {
@@ -33,14 +34,17 @@ export const History: React.FC = () => {
     }
     fetchHistory();
   }, []);
+    history.sort((a, b) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
 
+  
   return (
     <div className={HistoryStyle.container}>
 
       {history.length > 0 ? (
         history.map((item) => {
           const winners = item.set.filter((player) => player.result);
-
           return (
             <button 
               key={item.id} 
