@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AddSet } from "../../components/AddSet/AddSet";
 import { useAddObject } from "../../Hooks/useAddObject";
 import { useAddObjectAPI } from "../../Hooks/useAddObjectAPI";
-import InputFieldStyle from "./InputField.module.css"
-export const InputField: React.FC = () => {
+
+export const InputField: React.FC<{ save: boolean }> = ({ save }) => {
   const {
     date,
     setDate,
@@ -12,10 +12,18 @@ export const InputField: React.FC = () => {
     players,
     updatePlayerData,
     validate,
-    getPayload,
+    getPayload
   } = useAddObject();
 
   const { sendAddObject, loading, error } = useAddObjectAPI();
+  const [gameMode, setGameMode] = useState<10 | 14>(10);
+
+  useEffect(() => {
+    if (!save) {
+      const today = new Date().toISOString().split("T")[0];
+      setDate(today);
+    }
+  }, [save, setDate]);
 
   const handleSave = async () => {
     const v = validate();
@@ -23,24 +31,52 @@ export const InputField: React.FC = () => {
       alert(v.error);
       return;
     }
-    try {
-      await sendAddObject(getPayload());
-      alert("Данные успешно сохранены!");
-    } catch {
-      alert("Ошибка при сохранении данных.");
+
+    const payload = getPayload();
+
+    if (!save) {
+      (payload as any).gameMode = gameMode;
+    }
+    if (save) {
+      try {
+        await sendAddObject(payload);
+        alert("Данные успешно сохранены!");
+      } catch {
+        alert("Ошибка при сохранении данных.");
+      }
+    } else {
+      try {
+        localStorage.setItem("startData", JSON.stringify(payload));
+        alert("Данные сохранены в localStorage.");
+      } catch {
+        alert("Ошибка при сохранении в localStorage.");
+      }
     }
   };
 
   return (
     <div>
-      <label>
-        Выберите дату:
-        <input
-          type="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
-        />
-      </label>
+      {save ? (
+        <label>
+          Выберите дату:
+          <input
+            type="date"
+            value={date}
+            onChange={e => setDate(e.target.value)}
+          />
+        </label>
+      ) : (
+        <label>
+          Выберите режим:
+          <select 
+            value={gameMode}
+            onChange={e => setGameMode(Number(e.target.value) as 10 | 14)}
+          >
+            <option value={10}>10</option>
+            <option value={14}>14</option>
+          </select>
+        </label>
+      )}
 
       <label>
         Количество игроков:
@@ -70,13 +106,14 @@ export const InputField: React.FC = () => {
           setResult={res =>
             updatePlayerData(idx, { result: res })
           }
+          showResult={save}
         />
       ))}
 
       {error && <div style={{ color: "red" }}>{error}</div>}
 
       <button onClick={handleSave} disabled={loading}>
-        {loading ? "Сохраняем…" : "Сохранить данные"}
+        {loading ? "Обработка…" : "Сохранить"}
       </button>
     </div>
   );

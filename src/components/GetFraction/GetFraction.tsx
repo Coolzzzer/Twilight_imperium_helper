@@ -5,6 +5,7 @@ import GetFractionStyle from "./GetFraction.module.css";
 type GetFractionProps = {
   id: any;
   img: boolean;
+  imgToken: boolean;
   name: boolean;
 };
 
@@ -43,6 +44,9 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
     <>
       {faction && (
         <>
+          {props.imgToken && (
+            <img src={faction.srcToken}  height="20vw" alt={faction.name} />
+          )}
           {props.img && (
             <img src={faction.srcLogo}  height="20vw" alt={faction.name} />
           )}

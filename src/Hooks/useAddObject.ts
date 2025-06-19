@@ -16,6 +16,7 @@ export const useAddObject = () => {
   const [date, setDate] = useState<string>("");
   const [quantity, setQuantity] = useState<number | null>(null);
   const [players, setPlayers] = useState<PlayerData[]>([]);
+  const [showResult, setShowResult] = useState<boolean>(false);
 
   const handleQuantityChange = (value: number) => {
     const qty = Math.min(value, 8);
@@ -46,8 +47,10 @@ export const useAddObject = () => {
       return { valid: false, error: "Заполните имена всех игроков!" };
     if (players.some(p => p.fraction === null))
       return { valid: false, error: "Выберите фракцию для каждого игрока!" };
-    if (!players.some(p => p.result))
+    if(showResult){
+      if (!players.some(p => p.result))
       return { valid: false, error: "Выберите хотя бы одного победителя!" };
+    }
     return { valid: true };
   };
 
@@ -66,5 +69,7 @@ export const useAddObject = () => {
     updatePlayerData,
     validate,
     getPayload,
+    showResult,
   };
+  
 };

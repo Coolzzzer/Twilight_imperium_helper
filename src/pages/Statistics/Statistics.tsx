@@ -88,7 +88,7 @@ export const Statistics = () => {
                         <h3>{tierName}</h3>
                         {factions.length > 0 ? (
                             factions.map((fraction) => (
-                                <GetFraction key={fraction} id={fraction} img={true} name={false} />
+                                <GetFraction imgToken={false} key={fraction} id={fraction} img={true} name={false} />
                             ))
                         ) : (
                             <p>Нет фракций в этом тире</p>
@@ -106,7 +106,7 @@ export const Statistics = () => {
                     <h2>Общая статистика фракций:</h2>
                     {Object.entries(factionStats).map(([fraction, stats]) => (
                         <div key={fraction}>
-                            <GetFraction id={fraction} img={true} name={false} />: {stats.wins} побед, {stats.losses} поражений
+                            <GetFraction imgToken={false} id={fraction} img={true} name={false} />: {stats.wins} побед, {stats.losses} поражений
                         </div>
                     ))}
                 </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HistoryStyle from "./History.module.css";
 import { GetFraction } from "../../components/GetFraction/GetFraction";
 import { DeleteObject } from "../../components/DeleteObject/DeleteObject";
+import { InputField } from "../InputField/InputField";
 
 type HistoryResponse = {
   id: string;
@@ -17,7 +18,6 @@ type HistoryResponse = {
 export const History: React.FC = () => {
   const [history, setHistory] = useState<HistoryResponse[]>([]);
   const [expanded, setExpanded] = useState<string | null>(null);
-
 
   useEffect(() => {
     async function fetchHistory() {
@@ -40,8 +40,9 @@ export const History: React.FC = () => {
 
   
   return (
+    
     <div className={HistoryStyle.container}>
-
+      <InputField save={true}/>
       {history.length > 0 ? (
         history.map((item) => {
           const winners = item.set.filter((player) => player.result);
@@ -57,7 +58,7 @@ export const History: React.FC = () => {
                   {winners.map((winner, winnerIndex) => (
                     <div key={winnerIndex}>
                       {winner.player} -<span> победил на - </span> 
-                      <GetFraction id={winner.fraction} img={true} name={true} /> 
+                      <GetFraction imgToken={false} id={winner.fraction} img={true} name={true} /> 
                     </div>
                   ))}
                 </div>
@@ -69,7 +70,7 @@ export const History: React.FC = () => {
                   <p>Количество участников: {item.quantity}</p>
                   {item.set.map((elem, setIndex) => (
                     <div key={setIndex}>
-                      {elem.player} - <GetFraction id={elem.fraction} img={true} name={true} />
+                      {elem.player} - <GetFraction imgToken={false} id={elem.fraction} img={true} name={true} />
                     </div>
                   ))}
                 <DeleteObject id={item.id}/>

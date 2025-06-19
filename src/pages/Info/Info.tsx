@@ -12,7 +12,7 @@ export const Info: React.FC = () => {
             <div className={InfoStyle.buttonsWrapper}>
               {buttons.map((id) => (
                 <button key={id} onClick={() => setFactionId(id)}>
-                        <GetFraction id={id} img={true} name={true} />{" "}
+                        <GetFraction imgToken={false} id={id} img={true} name={true} />{" "}
                 </button>
               ))}
             </div>

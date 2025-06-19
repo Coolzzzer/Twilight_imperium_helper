@@ -9,9 +9,10 @@ type AddSetItem = {
     setChangeItem: (item: string) => void;
     result: boolean;
     setResult: (value: boolean) => void;
+    showResult:boolean
 };
 
-export const AddSet: React.FC<AddSetItem> = ({ selectedItem, setSelectedItem, changeItem, setChangeItem, result, setResult }) => {
+export const AddSet: React.FC<AddSetItem> = ({ selectedItem, setSelectedItem, changeItem, setChangeItem, result, setResult, showResult  }) => {
   const [isOpen, setIsOpen] = useState(false);
   const items = Array.from({ length: 25 }, (_, i) => i);
 
@@ -21,7 +22,6 @@ export const AddSet: React.FC<AddSetItem> = ({ selectedItem, setSelectedItem, ch
     setSelectedItem(item);
     setIsOpen(false);
   };
-
   return (
     <div>
         <input
@@ -30,7 +30,7 @@ export const AddSet: React.FC<AddSetItem> = ({ selectedItem, setSelectedItem, ch
             onChange={(e) => setChangeItem(e.target.value)} 
         />
         <button onClick={toggleDropdown}>
-            {selectedItem !== null ? <GetFraction id={selectedItem} img={true} name={false} /> : "Выберите фракцию"}
+            {selectedItem !== null ? <GetFraction imgToken={false} id={selectedItem} img={true} name={false} /> : "Выберите фракцию"}
         </button>
         {isOpen && (
             <ul
@@ -52,19 +52,19 @@ export const AddSet: React.FC<AddSetItem> = ({ selectedItem, setSelectedItem, ch
                             cursor: "pointer",
                             borderBottom: "1px solid #eee",
                         }}               >
-                        <GetFraction id={item} img={true} name={true} />
+                        <GetFraction imgToken={false} id={item} img={true} name={true} />
                     </li>
                 ))}
             </ul>
         )}
-        <label>
+        {showResult &&(<label>
             <input 
                 type="checkbox" 
                 checked={result} 
                 onChange={(e) => setResult(e.target.checked)} 
             />
-            Победил
-        </label>
+            Победил 
+        </label>)}
     </div>
   );
 };

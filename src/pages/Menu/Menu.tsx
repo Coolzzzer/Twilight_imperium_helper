@@ -3,25 +3,18 @@ import MenuStyle from "./Menu.module.css"
 export const Menu = () =>{
 	return (
         <>
-            <div>
+            <div style={{ display: "flex", gap: "1rem" }}>
                 <NavLink to='/main'>	
-                    main 
+                    Главная
                 </NavLink>
-                <br></br>
                 <NavLink to='/info'>
-                    info
+                    Информация
                 </NavLink>
-                <br></br>
                 <NavLink to='/statistics'>
-                    statistics
+                    Статистика
                 </NavLink>
-                <br></br>
                 <NavLink to='/history'>
-                    history
-                </NavLink>
-                <br></br>
-                <NavLink to='/inputfield'>
-                    inputfield
+                    История
                 </NavLink>
             </div>
             <div>
