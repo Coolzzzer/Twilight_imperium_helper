@@ -10,7 +10,7 @@ export const Start:React.FC<StartProps> = ({isStart,startGame,endGame}) => {
 
     return (
         <>
-            { !isStart? <button onClick={startGame}>Начать игру</button>: <button onClick={endGame}>Закончить игру</button>}
+            { !isStart? <button onClick={startGame}>Загрузить игру</button>: <button onClick={endGame}>Закончить игру</button>}
             {!isStart &&(<InputField save={false}/>)}
         </>
     );

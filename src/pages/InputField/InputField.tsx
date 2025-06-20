@@ -36,6 +36,10 @@ export const InputField: React.FC<{ save: boolean }> = ({ save }) => {
 
     if (!save) {
       (payload as any).gameMode = gameMode;
+      (payload as any).set = (payload as any).set.map((player: any) => ({
+        ...player,
+        point: 0,
+      }));
     }
     if (save) {
       try {

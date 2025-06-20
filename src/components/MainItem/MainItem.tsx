@@ -19,15 +19,39 @@ export const MainItem:React.FC<MainItemProps>  = ({id,...props}) => {
     const [idElem, setIdElem] = useState<any>("");
     const raw = localStorage.getItem("startData");
     const startData = raw ? JSON.parse(raw) : null;
-
     const handleClick = () =>{
       setShowOverlay(!showOverlay)
     }
-    const handleClickOverlay = (fractionId: any) => {
+    const handleClickOverlay = (fractionId: number) => {
       setShowOverlay(false);
       setIdElem(fractionId);
-      console.log(fractionId);
+    
+      const raw = localStorage.getItem("startData");
+      if (!raw) return;
+    
+      const data = JSON.parse(raw);
+    
+      if (!Array.isArray(data.set)) return;
+    
+      const updatedSet = data.set.map((item: any) => {
+        if (item.fraction === fractionId) {
+          return {
+            ...item,
+            point: (item.point || 0) + 1,
+          };
+        }
+        return item;
+      });
+    
+      const updatedData = {
+        ...data,
+        set: updatedSet,
+      };
+    
+      localStorage.setItem("startData", JSON.stringify(updatedData));
     };
+    
+    
     
     useEffect(() => {
       async function fetchMain() {
@@ -51,7 +75,8 @@ export const MainItem:React.FC<MainItemProps>  = ({id,...props}) => {
   return(
     <>
         <img {...props} src={src} onClick={handleClick} width="120vw" id={id}/>
-        {showOverlay && (            
+        {showOverlay && (        
+             
           startData?.set?.map((element, index) => (
             <GetFraction
               key={index}
@@ -60,6 +85,10 @@ export const MainItem:React.FC<MainItemProps>  = ({id,...props}) => {
               id={element.fraction}
               name={false}
               onClick={() => handleClickOverlay(element.fraction)}
+              style={{
+                position:"absolute",
+                margin:`${index*25}px 0`
+              }}
             />
           ))
       )}
