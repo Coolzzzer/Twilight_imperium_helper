@@ -9,7 +9,7 @@ type GetFractionProps = {
   name: boolean;
 };
 
-export const GetFraction: React.FC<GetFractionProps> = (props) => {
+export const GetFraction: React.FC<GetFractionProps & React.ImgHTMLAttributes<HTMLImageElement>> = ({ id, img, imgToken, name, ...rest }) => {
   const [faction, setFaction] = useState<FactionResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
   useEffect(() => {
     async function fetchFactionById() {
       try {
-        const response = await fetch(`http://localhost:5000/initial/${props.id}`);
+        const response = await fetch(`http://localhost:5000/initial/${id}`);
         if (!response.ok) {
           throw new Error(`Ошибка при получении фракции: ${response.statusText}`);
         }
@@ -31,7 +31,7 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
       }
     }
     fetchFactionById();
-  }, [props.id]);
+  }, [id]);
 
   if (loading) {
     return <p>Загрузка...</p>;
@@ -44,13 +44,13 @@ export const GetFraction: React.FC<GetFractionProps> = (props) => {
     <>
       {faction && (
         <>
-          {props.imgToken && (
-            <img src={faction.srcToken}  height="20vw" alt={faction.name} />
+          {imgToken && (
+            <img src={faction.srcToken}  height="20vw" alt={faction.name} {...rest}/>
           )}
-          {props.img && (
+          {img && (
             <img src={faction.srcLogo}  height="20vw" alt={faction.name} />
           )}
-          {props.name && (
+          {name && (
             <span>{faction.name}</span>
           )}
         </>

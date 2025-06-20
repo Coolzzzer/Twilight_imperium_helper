@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MainItemStyle from "./MainItem.module.css";
+import { GetFraction } from "../GetFraction/GetFraction";
 
 type MainItemProps = {
     id: string;
@@ -14,6 +15,19 @@ type MainItemResponse = {
 
 export const MainItem:React.FC<MainItemProps>  = ({id,...props}) => {
     const [main, setMain] = useState<MainItemResponse[]>([]);
+    const [showOverlay, setShowOverlay] = useState(false);
+    const [idElem, setIdElem] = useState<any>("");
+    const raw = localStorage.getItem("startData");
+    const startData = raw ? JSON.parse(raw) : null;
+
+    const handleClick = () =>{
+      setShowOverlay(!showOverlay)
+    }
+    const handleClickOverlay = (fractionId: any) => {
+      setShowOverlay(false);
+      setIdElem(fractionId);
+      console.log(fractionId);
+    };
     
     useEffect(() => {
       async function fetchMain() {
@@ -36,7 +50,19 @@ export const MainItem:React.FC<MainItemProps>  = ({id,...props}) => {
       }
   return(
     <>
-        <img {...props} src={src} width="15%"/>
+        <img {...props} src={src} onClick={handleClick} width="120vw" id={id}/>
+        {showOverlay && (            
+          startData?.set?.map((element, index) => (
+            <GetFraction
+              key={index}
+              img={false}
+              imgToken={true}
+              id={element.fraction}
+              name={false}
+              onClick={() => handleClickOverlay(element.fraction)}
+            />
+          ))
+      )}
     </>
   );
 };

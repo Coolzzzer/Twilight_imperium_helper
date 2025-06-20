@@ -6,15 +6,14 @@ import { GetFraction } from "../../components/GetFraction/GetFraction";
 
 export const Main = () => {
     const [isStart, setIsStart] = useState<boolean| null>(null)
+    const raw = localStorage.getItem("startData");
+    const startData = raw ? JSON.parse(raw) : null;
     const startGame = ()=>{
         setIsStart(true)
     }
     const endGame = ()=>{
         setIsStart(false)
     }
-    const raw = localStorage.getItem("startData");
-    const startData = raw ? JSON.parse(raw) : null;
-
     
 
     return (
@@ -31,10 +30,7 @@ export const Main = () => {
                 ): null
             )
             }
-            
-            {startData?.set?.map((element,index) => {
-                return <GetFraction key={index} img={false} imgToken={true} id={element.fraction} name={false}/>
-            })}
+        
         </>
     );
 };
