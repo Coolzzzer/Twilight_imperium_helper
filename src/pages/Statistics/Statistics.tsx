@@ -18,6 +18,7 @@ export const Statistics = () => {
                     throw new Error(`Ошибка при получении фракции: ${response.statusText}`);
                 }
                 const da = await response.json();
+
                 setData(da || []);
             } catch (err: any) {
                 setError(err.message);
@@ -32,44 +33,90 @@ export const Statistics = () => {
     useEffect(() => {
         if (data.length === 0) return;
 
-        const factionData: Record<string, { wins: number, losses: number }> = {};
+        const factionData: Record<string, { wins: number, losses: number, winRate: number }> = {};
         const tierGroups: Record<string, string[]> = {
-            "S - 75%+ побед": [],
-            "A - 50%+ побед": [],
-            "B - 25%+ побед": [],
-            "C - 10%+ побед": [],
-            "D - менее 10% побед": []
+            "S": [],
+            "A": [],
+            "B": [],
+            "C": [],
+            "D": []
         };
 
         data.forEach((element) => {
             if (!element?.set) return;
-
             element.set.forEach((el: any) => {
                 const fraction = el.fraction;
+                const quantity = element.quantity
                 if (!factionData[fraction]) {
-                    factionData[fraction] = { wins: 0, losses: 0 };
+                    factionData[fraction] = { wins: 0, losses: 0, winRate: 0 };
                 }
-                el.result ? factionData[fraction].wins++ : factionData[fraction].losses++;
+                
+                if(el.result){
+                    factionData[fraction].wins++
+                    if(quantity == 2){
+                        factionData[fraction].winRate+=0.5
+                    }
+                    if(quantity == 3){
+                        factionData[fraction].winRate+=0.66
+                    }
+                    if(quantity == 4){
+                        factionData[fraction].winRate+=0.75
+                    }
+                    if(quantity == 5){
+                        factionData[fraction].winRate+=0.8
+                    }
+                    if(quantity == 6){
+                        factionData[fraction].winRate+=0.83
+                    }
+                    if(quantity == 7){
+                        factionData[fraction].winRate+=0.86
+                    }
+                    if(quantity == 7){
+                        factionData[fraction].winRate+=0.88
+                    }
+                }  else{
+                    factionData[fraction].losses++;
+                    if(quantity == 2){
+                        factionData[fraction].winRate-=0.5
+                    }
+                    if(quantity == 3){
+                        factionData[fraction].winRate-=0.33
+                    }
+                    if(quantity == 4){
+                        factionData[fraction].winRate-=0.25
+                    }
+                    if(quantity == 5){
+                        factionData[fraction].winRate-=0.2
+                    }
+                    if(quantity == 6){
+                        factionData[fraction].winRate-=0.17
+                    }
+                    if(quantity == 7){
+                        factionData[fraction].winRate-=0.14
+                    }
+                    if(quantity == 7){
+                        factionData[fraction].winRate-=0.12
+                    }
+                }
             });
         });
 
         setFactionStats(factionData);
 
         Object.keys(factionData).forEach((fraction) => {
-            const { wins, losses } = factionData[fraction];
-            const totalGames = wins + losses;
-            const winRate = totalGames > 0 ? (wins / totalGames) * 100 : 0;
-
-            if (winRate >= 75) {
-                tierGroups["S - 75%+ побед"].push(fraction);
-            } else if (winRate >= 50) {
-                tierGroups["A - 50%+ побед"].push(fraction);
-            } else if (winRate >= 25) {
-                tierGroups["B - 25%+ побед"].push(fraction);
-            } else if (winRate >= 10) {
-                tierGroups["C - 10%+ побед"].push(fraction);
+            const winRate  = factionData[fraction].winRate;
+            console.log(winRate)
+            
+            if (winRate >= 2) {
+                tierGroups["S"].push(fraction);
+            } else if (winRate >= 1) {
+                tierGroups["A"].push(fraction);
+            } else if (winRate >= 0.5) {
+                tierGroups["B"].push(fraction);
+            } else if (winRate >= 0) {
+                tierGroups["C"].push(fraction);
             } else {
-                tierGroups["D - менее 10% побед"].push(fraction);
+                tierGroups["D"].push(fraction);
             }
         });
 
