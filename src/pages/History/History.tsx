@@ -58,7 +58,7 @@ export const History: React.FC = () => {
                   {winners.map((winner, winnerIndex) => (
                     <div key={winnerIndex}>
                       {winner.player} -<span> победил на - </span> 
-                      <GetFraction imgToken={false} id={winner.fraction} img={true} name={true} /> 
+                      <GetFraction imgToken={false} id={winner.fraction} img={true} name={false} /> 
                     </div>
                   ))}
                 </div>

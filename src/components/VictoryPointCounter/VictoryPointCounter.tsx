@@ -11,7 +11,7 @@ export const VictoryPointCounter: React.FC<VictoryPointCounterProps> = ({ isHard
   const width = [820, 830];
   const widthItem = [54.66, 75.45];
   let top = 0;
-  let left = 1;
+  let left = 0;
   const [startData, setStartData] = useState<any>(() => {
     const raw = localStorage.getItem("startData");
     return raw ? JSON.parse(raw) : null;
