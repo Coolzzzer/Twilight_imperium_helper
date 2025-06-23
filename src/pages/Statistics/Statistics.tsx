@@ -6,10 +6,10 @@ export const Statistics = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [data, setData] = useState<any[]>([]);
-    const [factionStats, setFactionStats] = useState<Record<string, { wins: number, losses: number }>>({});
+    const [factionStats, setFactionStats] = useState<Record<string, { wins: number, losses: number, winners: string[], losers: string[] }>>({});
     const [tierList, setTierList] = useState<Record<string, string[]>>({});
     const [showStats, setShowStats] = useState<boolean>(false);
-
+    const [hoveredFraction, setHoveredFraction] = useState<string | null>(null);   
     useEffect(() => {
         async function fetchFactionById() {
             try {
@@ -33,7 +33,7 @@ export const Statistics = () => {
     useEffect(() => {
         if (data.length === 0) return;
 
-        const factionData: Record<string, { wins: number, losses: number, winRate: number }> = {};
+        const factionData: Record<string, { wins: number, losses: number, winRate: number, winners:any, losers: any }> = {};
         const tierGroups: Record<string, string[]> = {
             "S": [],
             "A": [],
@@ -48,10 +48,10 @@ export const Statistics = () => {
                 const fraction = el.fraction;
                 const quantity = element.quantity
                 if (!factionData[fraction]) {
-                    factionData[fraction] = { wins: 0, losses: 0, winRate: 0 };
+                    factionData[fraction] = { wins: 0, losses: 0, winRate: 0, winners: [], losers: [] };
                 }
-                
                 if(el.result){
+                    factionData[fraction].winners.push(` ${el.player}`)
                     factionData[fraction].wins++
                     if(quantity == 2){
                         factionData[fraction].winRate+=0.5
@@ -76,6 +76,7 @@ export const Statistics = () => {
                     }
                 }  else{
                     factionData[fraction].losses++;
+                    factionData[fraction].losers.push(` ${el.player}`)
                     if(quantity == 2){
                         factionData[fraction].winRate-=0.5
                     }
@@ -97,23 +98,21 @@ export const Statistics = () => {
                     if(quantity == 7){
                         factionData[fraction].winRate-=0.12
                     }
+                    
                 }
             });
         });
 
         setFactionStats(factionData);
-
         Object.keys(factionData).forEach((fraction) => {
-            const winRate  = factionData[fraction].winRate;
-            console.log(winRate)
-            
-            if (winRate >= 2) {
+            const winRate  = factionData[fraction].winRate;            
+            if (winRate >= 1.5) {
                 tierGroups["S"].push(fraction);
-            } else if (winRate >= 1) {
+            } else if (winRate >= 0.9) {
                 tierGroups["A"].push(fraction);
-            } else if (winRate >= 0.5) {
+            } else if (winRate >= 0.3) {
                 tierGroups["B"].push(fraction);
-            } else if (winRate >= 0) {
+            } else if (winRate >= -0.2) {
                 tierGroups["C"].push(fraction);
             } else {
                 tierGroups["D"].push(fraction);
@@ -129,23 +128,52 @@ export const Statistics = () => {
     return (
         <>
             <div>
+                
                 <h2>Тир-лист фракций:</h2>
+                {hoveredFraction && (
+                    <div className={StatisticsStyle.tooltip} style={{
+                    zIndex:2,
+                    backgroundColor:"white", 
+                    width:"30vh",
+                    padding:"1vh",
+                    border: "1px solid black",
+                    margin: "20vh",
+                    position: "absolute",
+                    borderRadius: "1vh"
+                    }}>
+                        <GetFraction imgToken={false} id={hoveredFraction} img={false} name={true} />
+                        <div>Победы: {factionStats[hoveredFraction]?.wins ?? 0}, 
+                        поражения: {factionStats[hoveredFraction]?.losses ?? 0}</div>
+                        <div>Победители: {factionStats[hoveredFraction]?.winners.join(", ") || "нет"}</div>
+                        <div>Проигравшие: {factionStats[hoveredFraction]?.losers.join(", ") || "нет"}</div>
+                        <button onClick={() => setHoveredFraction(null)} style={{backgroundColor:"grey"}}>Закрыть</button>
+                    </div>
+                )}
+
                 {Object.entries(tierList).map(([tierName, factions]) => (
+                    
                     <div key={tierName}>
                         <h3>{tierName}</h3>
                         {factions.length > 0 ? (
                             factions.map((fraction) => (
-                                <GetFraction imgToken={false} key={fraction} id={fraction} img={true} name={false} />
+                                <button
+                                onClick={() => setHoveredFraction(fraction)}
+                                >
+                                    <GetFraction imgToken={false} key={fraction} id={fraction} img={true} name={false} />
+                                </button>
+                                
                             ))
                         ) : (
                             <p>Нет фракций в этом тире</p>
                         )}
+
+
                     </div>
                 ))}
             </div>
 
             <button onClick={() => setShowStats((prev) => !prev)}>
-                {showStats ? "Скрыть статистику" : "Показать статистику"}
+                {showStats ? "Скрыть статистику" : "Показать общую статистику"}
             </button>
 
             {showStats && (

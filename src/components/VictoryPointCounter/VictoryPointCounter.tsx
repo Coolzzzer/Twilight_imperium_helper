@@ -10,7 +10,8 @@ export const VictoryPointCounter: React.FC<VictoryPointCounterProps> = ({ isHard
   const height = 115;
   const width = [820, 830];
   const widthItem = [54.66, 75.45];
-
+  let top = 0;
+  let left = 1;
   const [startData, setStartData] = useState<any>(() => {
     const raw = localStorage.getItem("startData");
     return raw ? JSON.parse(raw) : null;
@@ -30,7 +31,27 @@ const renderPointMap: Record<number, ЕSX.Element[]> = {};
 if (startData?.set) {
   startData.set.forEach((item: any) => {
     const point = item.point;
-    if (typeof point === "number" && point > 0) {
+    if(startData.quantity<=6){
+      if(top == 6){
+        if(isHard){
+          left+=2;
+        }else{
+          left+=3;
+        }
+        top=0
+      }
+    }else{
+      if(top == 8){
+        if(isHard){
+          left+=2;
+        }else{
+          left+=3;
+        }
+        top=0
+      }
+    }
+    top+=2;
+    if (typeof point === "number" && point >= 0) {
       if (!renderPointMap[point]) renderPointMap[point] = [];
       renderPointMap[point].push(
         <GetFraction
@@ -41,15 +62,15 @@ if (startData?.set) {
           name={false}
           style={{
             position: "absolute",
-            top: 0,
-            left: 0,
+            top: top+"vh",
+            left: left+"vh",
           }}
         />
+        
       );
     }
   });
 }
-
 
   const totalCells = isHard ? 15 : 11;
   const itemWidth = isHard ? widthItem[0] : widthItem[1];
