@@ -1,5 +1,5 @@
 import { GetFraction } from "../GetFraction/GetFraction";
-
+import FactionTooltipStyle from "./FactionTooltip.module.css";
 type FactionTooltipProps = {
     fraction: string;
     stats: {
@@ -18,7 +18,7 @@ type FactionTooltipProps = {
       width: "30vh",
       padding: "1vh",
       border: "1px solid black",
-      margin: "5vh 30vh",
+      margin: "0 50vh",
       position: "absolute",
       borderRadius: "1vh"
     }}>
@@ -26,7 +26,10 @@ type FactionTooltipProps = {
       <div>Победы: {stats.wins}, поражения: {stats.losses}</div>
       <div><b>Победители:</b> {stats.winners.join(", ") || "нет"}</div>
       <div><b>Проигравшие:</b> {stats.losers.join(", ") || "нет"}</div>
-      <button onClick={onClose} style={{ backgroundColor: "grey" }}>Закрыть</button>
+      <button onClick={onClose} style={{ 
+        backgroundColor: "grey",
+        padding:"-2vh"
+     }}>Закрыть</button>
     </div>
   );
   

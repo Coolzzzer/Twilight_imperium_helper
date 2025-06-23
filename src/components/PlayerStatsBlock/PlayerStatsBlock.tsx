@@ -1,4 +1,5 @@
 import { GetFraction } from "../GetFraction/GetFraction";
+import PlayerStatsBlockStyle from "./PlayerStatsBlock.module.css";
 
 type PlayerStatsBlockProps = {
     playerStats: Record<string, { wins: number; losses: number }>;

@@ -1,5 +1,5 @@
 import { GetFraction } from "../GetFraction/GetFraction";
-
+import FactionStatsBlockStyle from "./FactionStatsBlock.module.css";
 type FactionStatsBlockProps = {
     factionStats: Record<
       string,

@@ -1,5 +1,5 @@
 import { GetFraction } from "../GetFraction/GetFraction";
-
+import TierListStyle from "./TierList.module.css";
 type TierListProps = {
     tierList: Record<string, string[]>;
     stats: Record<string, { winRate: number }>;
@@ -10,14 +10,18 @@ type TierListProps = {
     <>
       {Object.entries(tierList).map(([tier, factions]) => (
         <div key={tier}>
-          <h3>{tier}</h3>
+          <b style={{fontSize:"3vh"}}>{tier} </b>
           {factions.length === 0 ? (
             <p>Нет фракций в этом тире</p>
           ) : (
             [...factions]
               .sort((a, b) => stats[b].winRate - stats[a].winRate)
               .map(fraction => (
-                <button key={fraction} onClick={() => onHover(fraction)}>
+                <button key={fraction} onClick={() => onHover(fraction)} style={{
+                    padding:"1vh",
+                    margin:"0.5vh",
+                    backgroundColor:"white",
+                }}>
                   <GetFraction id={fraction} img={true} name={false} imgToken={false} />
                 </button>
               ))

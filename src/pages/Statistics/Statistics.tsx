@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-
 import { processData } from "../../utils/processData";
 import { FactionTooltip } from "../../components/FactionTooltip/FactionTooltip";
 import { TierList } from "../../components/TierList/TierList";
 import { FactionStatsBlock } from "../../components/FactionStatsBlock/FactionStatsBlock";
 import { PlayerStatsBlock } from "../../components/PlayerStatsBlock/PlayerStatsBlock";
-
+import StatisticsStyle from "./Statistics.module.css";
 
 export const Statistics = () => {
   const [loading, setLoading] = useState(true);
@@ -48,7 +47,11 @@ export const Statistics = () => {
 
   return (
     <>
-      <h2>Тир-лист фракций: {data.length} партий</h2>
+        <div style={{
+            fontSize:"5vh",
+            margin:"2vh 0"
+        }}><b>Тир-лист фракций:</b></div>
+      за <b>{data.length}</b> партий
       {hoveredFraction && (
         <FactionTooltip
           fraction={hoveredFraction}
