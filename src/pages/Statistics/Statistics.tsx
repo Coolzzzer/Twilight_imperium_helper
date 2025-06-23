@@ -106,15 +106,15 @@ export const Statistics = () => {
         setFactionStats(factionData);
         Object.keys(factionData).forEach((fraction) => {
             const winRate  = factionData[fraction].winRate;            
-            if (winRate >= 1.5) {
+            if (winRate >= 1.1) {
                 tierGroups["S"].push(fraction);
-            } else if (winRate >= 0.9) {
+            } else if (winRate >= 0.4) {
                 tierGroups["A"].push(fraction);
-            } else if (winRate >= 0.3) {
-                tierGroups["B"].push(fraction);
             } else if (winRate >= -0.2) {
+                tierGroups["B"].push(fraction);
+            } else if (winRate >= -0.535) {
                 tierGroups["C"].push(fraction);
-            } else {
+            } else{
                 tierGroups["D"].push(fraction);
             }
         });
@@ -130,6 +130,7 @@ export const Statistics = () => {
             <div>
                 
                 <h2>Тир-лист фракций:</h2>
+                за <b>{data.length}</b> партий
                 {hoveredFraction && (
                     <div className={StatisticsStyle.tooltip} style={{
                     zIndex:2,
@@ -137,15 +138,15 @@ export const Statistics = () => {
                     width:"30vh",
                     padding:"1vh",
                     border: "1px solid black",
-                    margin: "20vh",
+                    margin: "10vh 30vh",
                     position: "absolute",
                     borderRadius: "1vh"
                     }}>
-                        <GetFraction imgToken={false} id={hoveredFraction} img={false} name={true} />
+                        <b><GetFraction imgToken={false} id={hoveredFraction} img={false} name={true} /></b>
                         <div>Победы: {factionStats[hoveredFraction]?.wins ?? 0}, 
                         поражения: {factionStats[hoveredFraction]?.losses ?? 0}</div>
-                        <div>Победители: {factionStats[hoveredFraction]?.winners.join(", ") || "нет"}</div>
-                        <div>Проигравшие: {factionStats[hoveredFraction]?.losers.join(", ") || "нет"}</div>
+                        <div><b>Победители:</b> {factionStats[hoveredFraction]?.winners.join(", ") || "нет"}</div>
+                        <div><b>Проигравшие:</b> {factionStats[hoveredFraction]?.losers.join(", ") || "нет"}</div>
                         <button onClick={() => setHoveredFraction(null)} style={{backgroundColor:"grey"}}>Закрыть</button>
                     </div>
                 )}
@@ -181,7 +182,7 @@ export const Statistics = () => {
                     <h2>Общая статистика фракций:</h2>
                     {Object.entries(factionStats).map(([fraction, stats]) => (
                         <div key={fraction}>
-                            <GetFraction imgToken={false} id={fraction} img={true} name={false} />: {stats.wins} побед, {stats.losses} поражений
+                            <GetFraction imgToken={false} id={fraction} img={true} name={false} />: {stats.wins} побед, {stats.losses} поражений,{stats.q}
                         </div>
                     ))}
                 </div>
