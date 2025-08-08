@@ -10,7 +10,7 @@ type TierListProps = {
     <>
       {Object.entries(tierList).map(([tier, factions]) => (
         <div key={tier}>
-          <b style={{fontSize:"3vh"}}>{tier} </b>
+          <b style={{fontSize:"4vh"}}>{tier} </b>
           {factions.length === 0 ? (
             <p>Нет фракций в этом тире</p>
           ) : (
@@ -22,7 +22,7 @@ type TierListProps = {
                     margin:"0.5vh",
                     backgroundColor:"#030622",
                 }}>
-                  <GetFraction id={fraction} img={true} name={false} imgToken={false} />
+                  <GetFraction height="30vh" id={fraction} img={true} name={false} imgToken={false} />
                 </button>
               ))
           )}

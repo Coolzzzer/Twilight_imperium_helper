@@ -14,16 +14,19 @@ type FactionTooltipProps = {
   export const FactionTooltip = ({ fraction, stats, onClose }: FactionTooltipProps) => (
     <div style={{
       zIndex: 2,
-
-      width: "30vh",
+      width: "40vh",
       padding: "1vh",
       border: "1px solid black",
-      margin: "0 50vh",
       position: "absolute",
-      borderRadius: "1vh"
+      borderRadius: "1vh",
     }}>
-      <b><GetFraction id={fraction} img={false} name={true} imgToken={false} /></b>
+      <b><GetFraction id={fraction} img={true} name={true} imgToken={false} /></b>
+      <br />
+      Всего партиий: {stats.wins+stats.losses}
+      <br />
+      <br />
       <div>Победы: {stats.wins}, поражения: {stats.losses}</div>
+
       <div><b>Победители:</b> {stats.winners.join(", ") || "нет"}</div>
       <div><b>Проигравшие:</b> {stats.losers.join(", ") || "нет"}</div>
       <button onClick={onClose} >Закрыть</button>

@@ -42,11 +42,18 @@ export const Tir = () => {
       <h1>Тир-лист фракций:</h1>
       за <b>{data.length}</b> партий
       {hoveredFraction && (
-        <FactionTooltip
-          fraction={hoveredFraction}
-          stats={factionStats[hoveredFraction]}
-          onClose={() => setHoveredFraction(null)}
-        />
+        <div style={{
+          position: "absolute",
+          top: "15vw",
+          left: "30vw"
+        }}>
+          <FactionTooltip
+            fraction={hoveredFraction}
+            stats={factionStats[hoveredFraction]}
+            onClose={() => setHoveredFraction(null)}
+          />
+        </div>
+
       )}
       <TierList tierList={tierList} stats={factionStats} onHover={setHoveredFraction} />
     </>
