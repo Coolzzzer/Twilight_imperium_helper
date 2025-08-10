@@ -10,7 +10,17 @@ type FactionTooltipProps = {
     };
     onClose: () => void;
   };
+  function countNames(names: string[]): string {
+    const counts: Record<string, number> = {};
+    names.forEach(name => {
+      const trimmed = name.trim();
+      counts[trimmed] = (counts[trimmed] || 0) + 1;
+    });
   
+    return Object.entries(counts)
+      .map(([name, count]) => (count > 1 ? `${name}×${count}` : name))
+      .join(", ");
+  }
   export const FactionTooltip = ({ fraction, stats, onClose }: FactionTooltipProps) => (
     <div style={{
       zIndex: 2,
@@ -19,6 +29,7 @@ type FactionTooltipProps = {
       border: "1px solid black",
       position: "absolute",
       borderRadius: "1vh",
+      background: "#1a1a1a3f"
     }}>
       <b><GetFraction id={fraction} img={true} name={true} imgToken={false} /></b>
       <br />
@@ -27,9 +38,10 @@ type FactionTooltipProps = {
       <br />
       <div>Победы: {stats.wins}, поражения: {stats.losses}</div>
 
-      <div><b>Победители:</b> {stats.winners.join(", ") || "нет"}</div>
-      <div><b>Проигравшие:</b> {stats.losers.join(", ") || "нет"}</div>
+      <div><b>Победители:</b> {stats.winners.length > 0 ? countNames(stats.winners) : "нет"}</div>
+      <div><b>Проигравшие:</b> {stats.losers.length > 0 ? countNames(stats.losers) : "нет"}</div>
       <button onClick={onClose} >Закрыть</button>
+
     </div>
   );
   

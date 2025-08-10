@@ -39,9 +39,9 @@ export const AddSet: React.FC<AddSetItem> = ({ selectedItem, setSelectedItem, ch
                     listStyle: "none",
                     padding: 0,
                     margin: 0,
-                    border: "1px solid #ccc",
-                    background: "#fff",
-                    width: "250px",
+                    backgroundColor:"#030622",
+                    width: "270px",
+
                 }}
             >
                 {items.map((item) => (
@@ -50,7 +50,6 @@ export const AddSet: React.FC<AddSetItem> = ({ selectedItem, setSelectedItem, ch
                         onClick={() => handleSelect(item)}
                         style={{
                             cursor: "pointer",
-                            borderBottom: "1px solid #eee",
                         }}               >
                         <GetFraction imgToken={false} id={item} img={true} name={true} />
                     </li>

@@ -25,6 +25,8 @@ type FactionStatsBlockProps = {
             key={fraction}
             onClick={() => setHoveredFraction(fraction)}
             style={{
+              height:"6vh",
+              width:"6vh",
               padding:"3px",
               margin:"0.5vh",
               backgroundColor:"#030622"   

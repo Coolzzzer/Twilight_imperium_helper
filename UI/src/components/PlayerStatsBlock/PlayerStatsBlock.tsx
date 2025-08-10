@@ -25,7 +25,8 @@ export const PlayerStatsBlock = ({ playerStats, favoriteFactions, playerFactionR
           <div key={player}  style={{ flex: 1 }}>
             <button 
               onClick={() => setSelectedPlayer(player)}
-              style={{padding:"5px"}}
+              style={{padding:"5px", backgroundColor:"#030622", margin: "2px"  }}
+              
             >
               {favoriteFactions[player] !== "нет" && (
                     <GetFraction id={favoriteFactions[player]} img={true} name={false} imgToken={false} />
@@ -43,7 +44,8 @@ export const PlayerStatsBlock = ({ playerStats, favoriteFactions, playerFactionR
                   position: "absolute",
                   borderRadius: "1vh",
                   top: "0",
-                  left: "15vw"
+                  left: "15vw",
+                  background: "#1a1a1a3f"
                 }}
               >
 

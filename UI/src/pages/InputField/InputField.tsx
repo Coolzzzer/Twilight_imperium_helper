@@ -72,7 +72,7 @@ export const InputField: React.FC<{ save: boolean }> = ({ save }) => {
       ) : (
         <label>
           Выберите режим:
-          <select 
+          <select
             value={gameMode}
             onChange={e => setGameMode(Number(e.target.value) as 10 | 14)}
           >

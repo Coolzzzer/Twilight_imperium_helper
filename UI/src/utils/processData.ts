@@ -77,7 +77,7 @@ export function generateFavoriteFactions(data: any[], playerStats: Record<string
 }
 
 export function generateTierList(factionStats: Record<string, { winRate: number }>) {
-  const tierList: Record<string, string[]> = { S: [], A: [], B: [], C: [], D: [] };
+  const tierList: Record<string, string[]> = { S: [], A: [], B: [], C: [], D: []};
   for (const [fraction, data] of Object.entries(factionStats)) {
     const winRate = data.winRate;
     if (winRate >= 1.1) tierList.S.push(fraction);

@@ -1,8 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom"
-import img from "../../assets/img/background.png"
 export const Menu = () =>{
 	return (
-        <div style={{backgroundImage: `url(${img}`, width: "100vw", height: "100vh", padding: "2vh"}}>
+        <div style={{backgroundImage: `url(${`https://raw.githubusercontent.com/Coolzzzer/Twilight_imperium_helper/refs/heads/main/src/assets/img/background.png`}`, width: "100vw", height: "100vh", padding: "2vh"}}>
             <div style={{ display: "flex", gap: "1rem" }}>
                 {/* <NavLink to='/main'>	
                     Главная
@@ -10,7 +9,7 @@ export const Menu = () =>{
                 <NavLink to='/info'>
                     Информация
                 </NavLink>
-                <NavLink to='/statistics'>
+                <NavLink to='/statistics'> 
                     Статистика
                 </NavLink>
                 <NavLink to='/history'>
