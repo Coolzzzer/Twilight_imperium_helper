@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
-import { processData } from "../../utils/processData";
-import { FactionTooltip } from "../../components/FactionTooltip/FactionTooltip";
-import { TierList } from "../../components/TierList/TierList";
 import { FactionStatsBlock } from "../../components/FactionStatsBlock/FactionStatsBlock";
 import { PlayerStatsBlock } from "../../components/PlayerStatsBlock/PlayerStatsBlock";
-import StatisticsStyle from "./Statistics.module.css";
+import {
+  generateFactionStats,
+  generatePlayerStats,
+  generateFavoriteFactions,
+  generatePlayerFactionResults
+} from "../../utils/processData";
 
 export const Statistics = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<any[]>([]);
   const [factionStats, setFactionStats] = useState({});
-  const [tierList, setTierList] = useState({});
-  const [showStats, setShowStats] = useState(false);
-  const [hoveredFraction, setHoveredFraction] = useState<string | null>(null);
   const [playerStats, setPlayerStats] = useState({});
   const [favoriteFactions, setFavoriteFactions] = useState({});
+  const [playerFactionResults, setPlayerFactionResults] = useState({});
+  const [activeView, setActiveView] = useState<"factions" | "players">("factions");
 
   useEffect(() => {
     async function fetchData() {
@@ -35,40 +36,33 @@ export const Statistics = () => {
 
   useEffect(() => {
     if (data.length === 0) return;
-    const { factionStats, playerStats, favoriteFactions, tierList } = processData(data);
-    setFactionStats(factionStats);
-    setPlayerStats(playerStats);
-    setFavoriteFactions(favoriteFactions);
-    setTierList(tierList);
+    setPlayerFactionResults(generatePlayerFactionResults(data));
+    setFactionStats(generateFactionStats(data));
+    const stats = generatePlayerStats(data);
+    setPlayerStats(stats);
+    setFavoriteFactions(generateFavoriteFactions(data, stats));
   }, [data]);
 
   if (loading) return <p>Загрузка...</p>;
   if (error) return <p>Ошибка: {error}</p>;
 
   return (
-    <>
-        <div style={{
-            fontSize:"5vh",
-            margin:"2vh 0"
-        }}><b>Тир-лист фракций:</b></div>
-      за <b>{data.length}</b> партий
-      {hoveredFraction && (
-        <FactionTooltip
-          fraction={hoveredFraction}
-          stats={factionStats[hoveredFraction]}
-          onClose={() => setHoveredFraction(null)}
-        />
-      )}
-      <TierList tierList={tierList} stats={factionStats} onHover={setHoveredFraction} />
-      <button onClick={() => setShowStats(!showStats)}>
-        {showStats ? "Скрыть статистику" : "Показать общую статистику"}
-      </button>
-      {showStats && (
-        <div style={{ display: "flex", gap: "4vw", flexWrap: "wrap" }}>
-          <FactionStatsBlock factionStats={factionStats} />
-          <PlayerStatsBlock playerStats={playerStats} favoriteFactions={favoriteFactions} />
-        </div>
-      )}
-    </>
+    <div>
+      <div style={{ marginBottom: "16px", fontSize: "3vh" }}>
+        <button onClick={() => setActiveView("factions")}>Статистика фракций</button>
+        <button onClick={() => setActiveView("players")}>Статистика по игрокам</button>
+      </div>
+
+      <div style={{ display: "flex", gap: "4vw", flexWrap: "wrap" }}>
+        {activeView === "factions" && <FactionStatsBlock factionStats={factionStats} />}
+        {activeView === "players" && (
+          <PlayerStatsBlock
+            playerStats={playerStats}
+            favoriteFactions={favoriteFactions}
+            playerFactionResults={playerFactionResults}
+          />
+        )}
+      </div>
+    </div>
   );
 };

@@ -10,7 +10,7 @@ type TierListProps = {
     <>
       {Object.entries(tierList).map(([tier, factions]) => (
         <div key={tier}>
-          <b style={{fontSize:"3vh"}}>{tier} </b>
+          <img src={`https://raw.githubusercontent.com/Coolzzzer/Twilight_imperium_helper/refs/heads/main/src/assets/img/${tier}.png`} />
           {factions.length === 0 ? (
             <p>Нет фракций в этом тире</p>
           ) : (
@@ -20,9 +20,11 @@ type TierListProps = {
                 <button key={fraction} onClick={() => onHover(fraction)} style={{
                     padding:"1vh",
                     margin:"0.5vh",
-                    backgroundColor:"white",
+                    height:"6vh",
+                    width:"6vh",
+                    backgroundColor:"#030622",
                 }}>
-                  <GetFraction id={fraction} img={true} name={false} imgToken={false} />
+                  <GetFraction height="30vh" id={fraction} img={true} name={false} imgToken={false} />
                 </button>
               ))
           )}

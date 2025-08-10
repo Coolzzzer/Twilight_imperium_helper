@@ -9,7 +9,7 @@ type GetFractionProps = {
   name: boolean;
 };
 
-export const GetFraction: React.FC<GetFractionProps & React.ImgHTMLAttributes<HTMLImageElement>> = ({ id, img, imgToken, name, ...rest }) => {
+export const GetFraction: React.FC<GetFractionProps & React.ImgHTMLAttributes<HTMLImageElement>> = ({ id, img, imgToken, name, height="20vw" ,...rest }) => {
   const [faction, setFaction] = useState<FactionResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,13 +45,13 @@ export const GetFraction: React.FC<GetFractionProps & React.ImgHTMLAttributes<HT
       {faction && (
         <>
           {imgToken && (
-            <img src={faction.srcToken}  height="20vw" alt={faction.name} {...rest}/>
+            <img src={faction.srcToken}  height={height} alt={faction.name} {...rest}/>
           )}
           {img && (
-            <img src={faction.srcLogo}  height="20vw" alt={faction.name} />
+            <img src={faction.srcLogo}  height={height} alt={faction.name} />
           )}
           {name && (
-            <span>{faction.name}</span>
+            <span> {faction.name.toUpperCase()}</span>
           )}
         </>
       )}

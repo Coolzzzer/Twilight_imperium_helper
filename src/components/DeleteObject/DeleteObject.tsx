@@ -26,7 +26,13 @@ export const DeleteObject: React.FC<DeleteObjectProps> = ({ id }) => {
 
     return (
         <>
-            <div onClick={handleDelete} className={DeleteObjectStyle.deleteButton}>Удалить</div>
+            <div onClick={handleDelete} className={DeleteObjectStyle.deleteButton} style={{
+                backgroundColor:"red", 
+                padding:"1vh", 
+                margin:"1vh", 
+                borderRadius:"2vh", 
+                width:"8vh"
+            }}>Удалить</div>
         </>
     );
 };

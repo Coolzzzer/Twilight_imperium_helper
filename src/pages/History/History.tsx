@@ -66,10 +66,10 @@ export const History: React.FC = () => {
                 <p>Победитель не найден</p>
               )}
               {expanded === item.id && (
-                <div>
+                <div style={{position:"absolute", backgroundColor:"#030622", borderRadius:"10px", padding:"1vh"}}>
                   <p>Количество участников: {item.quantity}</p>
                   {item.set.map((elem, setIndex) => (
-                    <div key={setIndex}>
+                    <div key={setIndex} >
                       {elem.player} - <GetFraction imgToken={false} id={elem.fraction} img={true} name={true} />
                     </div>
                   ))}

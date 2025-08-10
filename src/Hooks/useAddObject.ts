@@ -56,7 +56,7 @@ export const useAddObject = () => {
 
   const getPayload = (): AddObjectPayload => ({
     date,
-    quantity: quantity!, // по валидации выше гарантированно не null
+    quantity: quantity!, 
     set: players,
   });
 
