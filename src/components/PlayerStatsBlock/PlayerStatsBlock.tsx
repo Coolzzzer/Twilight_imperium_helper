@@ -39,7 +39,7 @@ export const PlayerStatsBlock = ({ playerStats, favoriteFactions, playerFactionR
                 style={{
                   zIndex: 2,
                   width: "40vh",
-                  padding: "1vh",
+                  padding: "2vh",
                   border: "1px solid black",
                   position: "absolute",
                   borderRadius: "1vh",
@@ -50,9 +50,17 @@ export const PlayerStatsBlock = ({ playerStats, favoriteFactions, playerFactionR
               >
 
                 <h2>{player}</h2>
-                <h4>{stats.wins + stats.losses} партий, {stats.wins} побед, {stats.losses} поражений</h4>
                 <div>
-                  <b>Победы на:</b>{" "}
+                  Процент побед:{" "}
+                  {stats.wins + stats.losses > 0
+                    ? Math.round((stats.wins / (stats.wins + stats.losses)) * 100)
+                    : "—"}
+                  %
+                </div>
+                <div>{stats.wins + stats.losses} партий, {stats.wins} побед, {stats.losses} поражений</div>
+ 
+                <div>
+                  <h4>Победы на:</h4>{" "}
                   {playerFactionResults[player]?.wins.length > 0 ? (
                     Object.entries(countFactions(playerFactionResults[player].wins)).map(([id, count]) => (
                       <span key={`win-${id}`} style={{ marginRight: "8px", display: "inline-block" }}>
@@ -66,7 +74,7 @@ export const PlayerStatsBlock = ({ playerStats, favoriteFactions, playerFactionR
                 </div>
 
                 <div>
-                  <b>Поражения на:</b>{" "}
+                  <h4>Поражения на:</h4>{" "}
                   {playerFactionResults[player]?.loses.length > 0 ? (
                     Object.entries(countFactions(playerFactionResults[player].loses)).map(([id, count]) => (
                       <span key={`lose-${id}`} style={{ marginRight: "8px", display: "inline-block" }}>
@@ -79,7 +87,7 @@ export const PlayerStatsBlock = ({ playerStats, favoriteFactions, playerFactionR
                   )}
                 {favoriteFactions[player] !== "нет" && (
                   <div>
-                    <b>Любимая фракция:</b>{" "}
+                    <h4>Любимая фракция:</h4>{" "}
                     <GetFraction height="30vh" id={favoriteFactions[player]} img={true} name={false} imgToken={false} />
                   </div>
                 )}
@@ -89,8 +97,8 @@ export const PlayerStatsBlock = ({ playerStats, favoriteFactions, playerFactionR
                   onClick={() => setSelectedPlayer(null)}
                   style={{
                     border: "none",
-                    padding: "4px 8px",
-                    cursor: "pointer",
+                    padding: "10px",
+                    backgroundColor:"#030622"
                   }}
                 >
                   Закрыть

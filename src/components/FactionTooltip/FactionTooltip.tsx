@@ -38,9 +38,15 @@ type FactionTooltipProps = {
       <br />
       <div>Победы: {stats.wins}, поражения: {stats.losses}</div>
 
-      <div><b>Победители:</b> {stats.winners.length > 0 ? countNames(stats.winners) : "нет"}</div>
-      <div><b>Проигравшие:</b> {stats.losers.length > 0 ? countNames(stats.losers) : "нет"}</div>
-      <button onClick={onClose} >Закрыть</button>
+      <div><h3>Победители:</h3> {stats.winners.length > 0 ? countNames(stats.winners) : "нет"}</div>
+      <div><h3>Проигравшие:</h3> {stats.losers.length > 0 ? countNames(stats.losers) : "нет"}</div>
+      <button 
+        onClick={onClose} 
+        style={{
+          backgroundColor:"#030622",
+          margin:"10px"
+        }}
+      >Закрыть</button>
 
     </div>
   );
