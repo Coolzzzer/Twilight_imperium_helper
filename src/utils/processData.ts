@@ -80,9 +80,9 @@ export function generateTierList(factionStats: Record<string, { winRate: number 
   const tierList: Record<string, string[]> = { S: [], A: [], B: [], C: [], D: []};
   for (const [fraction, data] of Object.entries(factionStats)) {
     const winRate = data.winRate;
-    if (winRate >= 1.1) tierList.S.push(fraction);
+    if (winRate >= 1.7) tierList.S.push(fraction);
     else if (winRate >= 0.4) tierList.A.push(fraction);
-    else if (winRate >= -0.32) tierList.B.push(fraction);
+    else if (winRate >= -0.33) tierList.B.push(fraction);
     else if (winRate >= -0.7) tierList.C.push(fraction);
     else tierList.D.push(fraction);
   }

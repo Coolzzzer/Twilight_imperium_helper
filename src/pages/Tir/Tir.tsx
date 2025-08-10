@@ -44,8 +44,8 @@ export const Tir = () => {
       {hoveredFraction && (
         <div style={{
           position: "absolute",
-          top: "15vw",
-          left: "30vw"
+          top: "20vh",
+          left: "40vw"
         }}>
           <FactionTooltip
             fraction={hoveredFraction}

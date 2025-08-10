@@ -9,8 +9,20 @@ type TierListProps = {
   export const TierList = ({ tierList, stats, onHover }: TierListProps) => (
     <>
       {Object.entries(tierList).map(([tier, factions]) => (
-        <div key={tier}>
-          <img src={`https://raw.githubusercontent.com/Coolzzzer/Twilight_imperium_helper/refs/heads/main/src/assets/img/${tier}.png`} />
+        <div 
+          key={tier}
+          style={{
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          <img 
+            src={`https://raw.githubusercontent.com/Coolzzzer/Twilight_imperium_helper/refs/heads/main/src/assets/img/${tier}.png`} 
+            style={{
+              width:"10vh",
+            }}
+          />
+          <div>
           {factions.length === 0 ? (
             <p>Нет фракций в этом тире</p>
           ) : (
@@ -28,6 +40,7 @@ type TierListProps = {
                 </button>
               ))
           )}
+          </div>
         </div>
       ))}
     </>
