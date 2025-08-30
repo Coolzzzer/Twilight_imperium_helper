@@ -79,7 +79,7 @@ export const GetFraction: React.FC<
               <span
                 style={{
                   fontSize: fontSize,
-                  margin: "1px",
+                  margin: "2px",
                 }}
               >
                 {" "}
