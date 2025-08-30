@@ -7,20 +7,32 @@ type GetFractionProps = {
   img: boolean;
   imgToken: boolean;
   name: boolean;
-  fontSize?: string
+  fontSize?: string;
 };
 
-export const GetFraction: React.FC<GetFractionProps & React.ImgHTMLAttributes<HTMLImageElement>> = ({ id, img, imgToken, name, height="20vh", fontSize="2vh" ,...rest }) => {
+export const GetFraction: React.FC<
+  GetFractionProps & React.ImgHTMLAttributes<HTMLImageElement>
+> = ({
+  id,
+  img,
+  imgToken,
+  name,
+  height = "20vh",
+  fontSize = "1.5vh",
+  ...rest
+}) => {
   const [faction, setFaction] = useState<FactionResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   useEffect(() => {
     async function fetchFactionById() {
       try {
         const response = await fetch(`http://localhost:5000/initial/${id}`);
         if (!response.ok) {
-          throw new Error(`Ошибка при получении фракции: ${response.statusText}`);
+          throw new Error(
+            `Ошибка при получении фракции: ${response.statusText}`
+          );
         }
         const data: FactionResponse = await response.json();
         setFaction(data);
@@ -45,23 +57,36 @@ export const GetFraction: React.FC<GetFractionProps & React.ImgHTMLAttributes<HT
     <>
       {faction && (
         <>
-          <div style={{alignItems:"center", display:"inline-flex", justifyContent:"center"}}>
+          <div
+            style={{
+              alignItems: "center",
+              display: "inline-flex",
+              justifyContent: "center",
+            }}
+          >
             {imgToken && (
-              <img src={faction.srcToken}  height={height} alt={faction.name} {...rest}/>
+              <img
+                src={faction.srcToken}
+                height={height}
+                alt={faction.name}
+                {...rest}
+              />
             )}
             {img && (
-              <img src={faction.srcLogo}  height={height} alt={faction.name} />
+              <img src={faction.srcLogo} height={height} alt={faction.name} />
             )}
             {name && (
-              <span 
+              <span
                 style={{
                   fontSize: fontSize,
-                  margin: "5px"
+                  margin: "1px",
                 }}
-              > {faction.name.toUpperCase()}</span>
+              >
+                {" "}
+                {faction.name.toUpperCase()}
+              </span>
             )}
           </div>
-
         </>
       )}
     </>
