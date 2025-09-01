@@ -111,7 +111,6 @@ export function generateTierList(
   for (const [fraction, data] of Object.entries(factionStats)) {
     const winRate = data.winRate;
     const win = data.wins;
-
     if (winRate >= 1.8 && win > 0) tierList.S.push(fraction);
     else if (winRate >= 0.2 && win > 0) tierList.A.push(fraction);
     else if (winRate >= -0.5 && win > 0) tierList.B.push(fraction);

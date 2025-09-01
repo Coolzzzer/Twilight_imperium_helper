@@ -62,6 +62,7 @@ export const GetFraction: React.FC<
               alignItems: "center",
               display: "inline-flex",
               justifyContent: "center",
+              gap: "1vh",
             }}
           >
             {imgToken && (

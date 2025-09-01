@@ -1,0 +1,38 @@
+.tierRow {
+  display: flex;
+  align-items: center;
+  padding: 0.2vh;
+  border-radius: 1vh;
+}
+
+.tierIcon {
+  width: 10vh;
+  margin-right: 2vh;
+}
+.tierIconO {
+  margin-top: 5vh;
+}
+.factionGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vh;
+}
+.factionGroupO {
+  margin-top: 5vh;
+}
+
+.fractionButton {
+  height: 6vh;
+  width: 6vh;
+  padding: 1vh;
+  background-color: #030622;
+  border: none;
+  border-radius: 0.5vh;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fractionButton:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 2vh #5e5eff;
+}

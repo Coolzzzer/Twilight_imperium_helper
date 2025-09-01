@@ -5,7 +5,7 @@ import {
   generateFactionStats,
   generatePlayerStats,
   generateFavoriteFactions,
-  generatePlayerFactionResults
+  generatePlayerFactionResults,
 } from "../../utils/processData";
 
 export const Statistics = () => {
@@ -16,7 +16,9 @@ export const Statistics = () => {
   const [playerStats, setPlayerStats] = useState({});
   const [favoriteFactions, setFavoriteFactions] = useState({});
   const [playerFactionResults, setPlayerFactionResults] = useState({});
-  const [activeView, setActiveView] = useState<"factions" | "players">("factions");
+  const [activeView, setActiveView] = useState<"factions" | "players">(
+    "factions"
+  );
 
   useEffect(() => {
     async function fetchData() {
@@ -49,12 +51,18 @@ export const Statistics = () => {
   return (
     <div>
       <div style={{ marginBottom: "16px", fontSize: "3vh" }}>
-        <button onClick={() => setActiveView("factions")}>Статистика фракций</button>
-        <button onClick={() => setActiveView("players")}>Статистика по игрокам</button>
+        <button onClick={() => setActiveView("factions")}>
+          Статистика фракций
+        </button>
+        <button onClick={() => setActiveView("players")}>
+          Статистика по игрокам
+        </button>
       </div>
 
       <div style={{ display: "flex", gap: "4vw", flexWrap: "wrap" }}>
-        {activeView === "factions" && <FactionStatsBlock factionStats={factionStats} />}
+        {activeView === "factions" && (
+          <FactionStatsBlock factionStats={factionStats} />
+        )}
         {activeView === "players" && (
           <PlayerStatsBlock
             playerStats={playerStats}

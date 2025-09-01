@@ -1,38 +1,46 @@
 import DeleteObjectStyle from "./DeleteObject.module.css";
 
 type DeleteObjectProps = {
-    id: string;
+  id: string;
 };
 
 export const DeleteObject: React.FC<DeleteObjectProps> = ({ id }) => {
-    
-    const handleDelete = async () => {
-        try {
-            const response = await fetch(`http://localhost:5000/date/${id}`, {
-                method: "DELETE",
-            });
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/date/${id}`, {
+        method: "DELETE",
+      });
 
-            if (!response.ok) {
-                throw new Error("Ошибка при удалении данных");
-            }
+      if (!response.ok) {
+        throw new Error("Ошибка при удалении данных");
+      }
 
-            alert("Запись успешно удалена!");
-            window.location.reload(); // Перезагружаем страницу, чтобы обновить список
-        } catch (error) {
-            console.error("Ошибка удаления:", error);
-            alert("Ошибка при удалении.");
-        }
-    };
+      alert("Запись успешно удалена!");
+      window.location.reload(); // Перезагружаем страницу, чтобы обновить список
+    } catch (error) {
+      console.error("Ошибка удаления:", error);
+      alert("Ошибка при удалении.");
+    }
+  };
 
-    return (
-        <>
-            <div onClick={handleDelete} className={DeleteObjectStyle.deleteButton} style={{
-                backgroundColor:"red", 
-                padding:"1vh", 
-                margin:"1vh", 
-                borderRadius:"2vh", 
-                width:"8vh"
-            }}>Удалить</div>
-        </>
-    );
+  return (
+    <>
+      <button
+        onClick={handleDelete}
+        className={DeleteObjectStyle.deleteButton}
+        style={{
+          display: "flex",
+          backgroundColor: "red",
+          padding: "1vh",
+          marginTop: "4vh",
+          borderRadius: "1vh",
+          width: "10vh",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Удалить
+      </button>
+    </>
+  );
 };

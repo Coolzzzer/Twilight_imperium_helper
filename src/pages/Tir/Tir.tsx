@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { FactionTooltip } from "../../components/FactionTooltip/FactionTooltip";
 import { TierList } from "../../components/TierList/TierList";
-import { generateFactionStats, generateTierList } from "../../utils/processData";
+import {
+  generateFactionStats,
+  generateTierList,
+} from "../../utils/processData";
 
 export const Tir = () => {
   const [hoveredFraction, setHoveredFraction] = useState<string | null>(null);
@@ -42,20 +45,25 @@ export const Tir = () => {
       <h1>Тир-лист фракций:</h1>
       за <b>{data.length}</b> партий
       {hoveredFraction && (
-        <div style={{
-          position: "absolute",
-          top: "20vh",
-          left: "40vw"
-        }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "20vh",
+            left: "40vw",
+          }}
+        >
           <FactionTooltip
             fraction={hoveredFraction}
             stats={factionStats[hoveredFraction]}
             onClose={() => setHoveredFraction(null)}
           />
         </div>
-
       )}
-      <TierList tierList={tierList} stats={factionStats} onHover={setHoveredFraction} />
+      <TierList
+        tierList={tierList}
+        stats={factionStats}
+        onHover={setHoveredFraction}
+      />
     </>
   );
 };

@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  padding: 2vh;
+  border-radius: 2vh;
+}
+
+.buttonPanel {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.factionButton {
+  padding: 0.1vh;
+  margin: 0.1vh;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.factionButton:hover {
+  box-shadow: 0 0 1vh #5e5eff;
+}
+
+.infoPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10vh;
+}
+
+.status {
+  color: #ccc;
+  font-size: 2vh;
+  margin-bottom: 2vh;
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.factionImage {
+  max-height: 60vh;
+  border-radius: 2vh;
+  box-shadow: 0 0 2vh #5e5eff;
+}

@@ -12,7 +12,7 @@ export const InputField: React.FC<{ save: boolean }> = ({ save }) => {
     players,
     updatePlayerData,
     validate,
-    getPayload
+    getPayload,
   } = useAddObject();
 
   const { sendAddObject, loading, error } = useAddObjectAPI();
@@ -66,50 +66,42 @@ export const InputField: React.FC<{ save: boolean }> = ({ save }) => {
           <input
             type="date"
             value={date}
-            onChange={e => setDate(e.target.value)}
+            onChange={(e) => setDate(e.target.value)}
           />
         </label>
       ) : (
-        <label>
+        <div>
           Выберите режим:
           <select
             value={gameMode}
-            onChange={e => setGameMode(Number(e.target.value) as 10 | 14)}
+            onChange={(e) => setGameMode(Number(e.target.value) as 10 | 14)}
           >
             <option value={10}>10</option>
             <option value={14}>14</option>
           </select>
-        </label>
+        </div>
       )}
 
-      <label>
+      <div>
         Количество игроков:
         <input
           type="number"
           placeholder="Введите количество"
           value={quantity ?? ""}
           max={8}
-          onChange={e =>
-            handleQuantityChange(Number(e.target.value))
-          }
+          onChange={(e) => handleQuantityChange(Number(e.target.value))}
         />
-      </label>
+      </div>
 
       {players.map((p, idx) => (
         <AddSet
           key={idx}
           selectedItem={p.fraction}
-          setSelectedItem={frac =>
-            updatePlayerData(idx, { fraction: frac })
-          }
+          setSelectedItem={(frac) => updatePlayerData(idx, { fraction: frac })}
           changeItem={p.player}
-          setChangeItem={name =>
-            updatePlayerData(idx, { player: name })
-          }
+          setChangeItem={(name) => updatePlayerData(idx, { player: name })}
           result={p.result}
-          setResult={res =>
-            updatePlayerData(idx, { result: res })
-          }
+          setResult={(res) => updatePlayerData(idx, { result: res })}
           showResult={save}
         />
       ))}
