@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
 import type { FactionResponse } from "../../Hooks/useInfoFaction";
-import GetFractionStyle from "./GetFraction.module.css";
+import styles from "./GetFraction.module.css";
 
 type GetFractionProps = {
-  id: any;
+  id: number;
   img: boolean;
   imgToken: boolean;
   name: boolean;
   fontSize?: string;
+  height?: string;
+  imgProps?: React.ImgHTMLAttributes<HTMLImageElement>;
 };
 
-export const GetFraction: React.FC<
-  GetFractionProps & React.ImgHTMLAttributes<HTMLImageElement>
-> = ({
+export const GetFraction: React.FC<GetFractionProps> = ({
   id,
   img,
   imgToken,
   name,
-  height = "20vh",
+  height = "20px",
   fontSize = "1.5vh",
-  ...rest
+  imgProps = {},
 }) => {
   const [faction, setFaction] = useState<FactionResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -46,50 +46,34 @@ export const GetFraction: React.FC<
     fetchFactionById();
   }, [id]);
 
-  if (loading) {
-    return <p>Загрузка...</p>;
-  }
-  if (error) {
-    return <p>{error}</p>;
-  }
+  if (loading) return <p className={styles.status}>Загрузка...</p>;
+  if (error) return <p className={styles.status}>{error}</p>;
 
   return (
-    <>
-      {faction && (
-        <>
-          <div
-            style={{
-              alignItems: "center",
-              display: "inline-flex",
-              justifyContent: "center",
-              gap: "1vh",
-            }}
-          >
-            {imgToken && (
-              <img
-                src={faction.srcToken}
-                height={height}
-                alt={faction.name}
-                {...rest}
-              />
-            )}
-            {img && (
-              <img src={faction.srcLogo} height={height} alt={faction.name} />
-            )}
-            {name && (
-              <span
-                style={{
-                  fontSize: fontSize,
-                  margin: "2px",
-                }}
-              >
-                {" "}
-                {faction.name.toUpperCase()}
-              </span>
-            )}
-          </div>
-        </>
-      )}
-    </>
+    faction && (
+      <div className={styles.wrapper}>
+        {imgToken && (
+          <img
+            src={faction.srcToken}
+            alt={faction.name}
+            style={{ height }}
+            {...imgProps}
+          />
+        )}
+        {img && (
+          <img
+            src={faction.srcLogo}
+            alt={faction.name}
+            style={{ height }}
+            {...imgProps}
+          />
+        )}
+        {name && (
+          <span className={styles.name} style={{ fontSize }}>
+            {faction.name.toUpperCase()}
+          </span>
+        )}
+      </div>
+    )
   );
 };

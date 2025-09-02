@@ -1,19 +1,55 @@
 import { NavLink, Outlet } from "react-router-dom";
+import styles from "./Menu.module.css";
+
 export const Menu = () => {
   return (
-    <div style={{ width: "100vw", height: "100vh", padding: "2vh" }}>
-      <div style={{ display: "flex", gap: "1rem" }}>
-        {/* <NavLink to='/main'>	
-                    Главная
-                </NavLink> */}
-        <NavLink to="/info">Информация</NavLink>
-        <NavLink to="/statistics">Статистика</NavLink>
-        <NavLink to="/history">История</NavLink>
-        <NavLink to="/tir">Тир-лист</NavLink>
-      </div>
-      <div>
+    <div className={styles.layout}>
+      <nav className={styles.nav}>
+        <NavLink
+          to="/info"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          Информация
+        </NavLink>
+        <NavLink
+          to="/statistics"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          Статистика
+        </NavLink>
+        <NavLink
+          to="/inputField"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          Поле ввода
+        </NavLink>
+        <NavLink
+          to="/history"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          История
+        </NavLink>
+        <NavLink
+          to="/tir"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          Тир-лист
+        </NavLink>
+      </nav>
+
+      <main className={styles.content}>
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 };

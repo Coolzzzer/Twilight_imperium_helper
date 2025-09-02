@@ -7,6 +7,7 @@ import {
   generateFavoriteFactions,
   generatePlayerFactionResults,
 } from "../../utils/processData";
+import styles from "./Statistics.module.css";
 
 export const Statistics = () => {
   const [loading, setLoading] = useState(true);
@@ -45,21 +46,31 @@ export const Statistics = () => {
     setFavoriteFactions(generateFavoriteFactions(data, stats));
   }, [data]);
 
-  if (loading) return <p>Загрузка...</p>;
-  if (error) return <p>Ошибка: {error}</p>;
+  if (loading) return <p className={styles.status}>Загрузка...</p>;
+  if (error) return <p className={styles.status}>Ошибка: {error}</p>;
 
   return (
-    <div>
-      <div style={{ marginBottom: "16px", fontSize: "3vh" }}>
-        <button onClick={() => setActiveView("factions")}>
+    <div className={styles.container}>
+      <div className={styles.toggle}>
+        <button
+          className={`${styles.toggleButton} ${
+            activeView === "factions" ? styles.active : ""
+          }`}
+          onClick={() => setActiveView("factions")}
+        >
           Статистика фракций
         </button>
-        <button onClick={() => setActiveView("players")}>
+        <button
+          className={`${styles.toggleButton} ${
+            activeView === "players" ? styles.active : ""
+          }`}
+          onClick={() => setActiveView("players")}
+        >
           Статистика по игрокам
         </button>
       </div>
 
-      <div style={{ display: "flex", gap: "4vw", flexWrap: "wrap" }}>
+      <div className={styles.panel}>
         {activeView === "factions" && (
           <FactionStatsBlock factionStats={factionStats} />
         )}

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { GetFraction } from "../GetFraction/GetFraction";
 import { FactionTooltip } from "../FactionTooltip/FactionTooltip";
+import styles from "./FactionStatsBlock.module.css";
+
 type FactionStatsBlockProps = {
   factionStats: Record<string, { wins: number; losses: number }>;
 };
@@ -8,45 +10,37 @@ type FactionStatsBlockProps = {
 export const FactionStatsBlock = ({ factionStats }: FactionStatsBlockProps) => {
   const [hoveredFraction, setHoveredFraction] = useState<string | null>(null);
 
+  const sortedFactions = Object.entries(factionStats).sort(
+    ([, aStats], [, bStats]) => {
+      const aTotal = aStats.wins + aStats.losses;
+      const bTotal = bStats.wins + bStats.losses;
+      return bTotal - aTotal;
+    }
+  );
+
   return (
-    <div style={{ flex: 1, minWidth: "30vw" }}>
-      <div>
-        {Object.entries(factionStats)
-          .sort(([, aStats], [, bStats]) => {
-            const aTotal = aStats.wins + aStats.losses;
-            const bTotal = bStats.wins + bStats.losses;
-            return bTotal - aTotal;
-          })
-          .map(([fraction]) => (
-            <button
-              key={fraction}
-              onClick={() => setHoveredFraction(fraction)}
-              style={{
-                height: "6vh",
-                width: "6vh",
-                padding: "3px",
-                margin: "0.5vh",
-                backgroundColor: "#030622",
-              }}
-            >
-              <GetFraction
-                height="40vw"
-                id={fraction}
-                img={true}
-                name={false}
-                imgToken={false}
-              />
-            </button>
-          ))}
+    <div className={styles.container}>
+      <div className={styles.grid}>
+        {sortedFactions.map(([fraction]) => (
+          <button
+            key={fraction}
+            onClick={() => setHoveredFraction(fraction)}
+            className={styles.fractionButton}
+            title={`Фракция ${fraction}`}
+          >
+            <GetFraction
+              height="30px"
+              id={fraction}
+              img={true}
+              name={false}
+              imgToken={false}
+            />
+          </button>
+        ))}
       </div>
+
       {hoveredFraction && (
-        <div
-          style={{
-            position: "absolute",
-            top: "30vh",
-            left: "30vw",
-          }}
-        >
+        <div className={styles.tooltipWrapper}>
           <FactionTooltip
             fraction={hoveredFraction}
             stats={factionStats[hoveredFraction]}

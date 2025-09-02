@@ -48,8 +48,8 @@ export const Tir = () => {
         <div
           style={{
             position: "absolute",
-            top: "20vh",
-            left: "40vw",
+            top: "25vh",
+            left: "50vw",
           }}
         >
           <FactionTooltip

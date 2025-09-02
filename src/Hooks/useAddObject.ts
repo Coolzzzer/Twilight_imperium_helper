@@ -19,7 +19,7 @@ export const useAddObject = () => {
   const [showResult, setShowResult] = useState<boolean>(false);
 
   const handleQuantityChange = (value: number) => {
-    const qty = Math.min(value, 8);
+    const qty = Math.max(3, Math.min(value, 8)); // ограничение от 3 до 8
     setQuantity(qty);
     setPlayers(
       Array.from({ length: qty }, () => ({
@@ -30,11 +30,8 @@ export const useAddObject = () => {
     );
   };
 
-  const updatePlayerData = (
-    index: number,
-    updated: Partial<PlayerData>
-  ) => {
-    setPlayers(prev =>
+  const updatePlayerData = (index: number, updated: Partial<PlayerData>) => {
+    setPlayers((prev) =>
       prev.map((p, i) => (i === index ? { ...p, ...updated } : p))
     );
   };
@@ -43,20 +40,20 @@ export const useAddObject = () => {
     if (!date) return { valid: false, error: "Выберите дату!" };
     if (!quantity || quantity < 1)
       return { valid: false, error: "Введите количество игроков!" };
-    if (players.some(p => !p.player.trim()))
+    if (players.some((p) => !p.player.trim()))
       return { valid: false, error: "Заполните имена всех игроков!" };
-    if (players.some(p => p.fraction === null))
+    if (players.some((p) => p.fraction === null))
       return { valid: false, error: "Выберите фракцию для каждого игрока!" };
-    if(showResult){
-      if (!players.some(p => p.result))
-      return { valid: false, error: "Выберите хотя бы одного победителя!" };
+    if (showResult) {
+      if (!players.some((p) => p.result))
+        return { valid: false, error: "Выберите хотя бы одного победителя!" };
     }
     return { valid: true };
   };
 
   const getPayload = (): AddObjectPayload => ({
     date,
-    quantity: quantity!, 
+    quantity: quantity!,
     set: players,
   });
 
@@ -71,5 +68,4 @@ export const useAddObject = () => {
     getPayload,
     showResult,
   };
-  
 };

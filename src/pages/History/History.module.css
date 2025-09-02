@@ -3,10 +3,9 @@
   border-radius: 2vh;
   color: #e0e0e0;
   display: flex;
+  margin-left: 5vw;
 }
-.inputBlock {
-  width: 35%;
-}
+
 .historyBlock {
   position: relative;
 }
@@ -21,6 +20,7 @@
   transition: background-color 0.3s ease;
   justify-content: center;
   gap: 1vh;
+  background-color: #0f0f49af;
 }
 
 .historyItem:hover {
@@ -60,7 +60,7 @@
 .details {
   position: absolute;
   top: 0;
-  left: 110%;
+  left: 120%;
   width: 80%;
   background-color: #030622;
   border-radius: 1vh;

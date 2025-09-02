@@ -38,7 +38,12 @@ export const FactionTooltip = ({
     }}
   >
     <b>
-      <GetFraction id={fraction} img={true} name={true} imgToken={false} />
+      <GetFraction
+        id={Number(fraction)}
+        img={true}
+        name={true}
+        imgToken={false}
+      />
     </b>
     <br />
     Всего партиий: {stats.wins + stats.losses}

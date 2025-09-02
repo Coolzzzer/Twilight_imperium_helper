@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./History.module.css";
 import { GetFraction } from "../../components/GetFraction/GetFraction";
 import { DeleteObject } from "../../components/DeleteObject/DeleteObject";
-import { InputField } from "../InputField/InputField";
 
 type HistoryResponse = {
   id: string;
@@ -43,9 +42,6 @@ export const History: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.inputBlock}>
-        <InputField save={true} />
-      </div>
       <div>
         {history.length > 0 ? (
           history.map((item) => {

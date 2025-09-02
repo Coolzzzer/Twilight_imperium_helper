@@ -1,0 +1,43 @@
+.layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #e0e0e0;
+}
+
+.nav {
+  display: flex;
+  width: auto;
+  gap: 3vh;
+  background-color: #1a1f4a;
+  padding: 1vh 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.link {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 2vh;
+  padding: 1vh 2vh;
+  border-radius: 0.5vh;
+  transition: background-color 0.3s ease;
+}
+
+.link:hover {
+  background-color: #2c3370;
+}
+
+.activeLink {
+  color: #ffd700;
+  font-weight: bold;
+  background-color: #2c3370;
+  border-radius: 0.5vh;
+  font-size: 2vh;
+  padding: 1vh 2vh;
+}
+
+.content {
+  flex: 1;
+}

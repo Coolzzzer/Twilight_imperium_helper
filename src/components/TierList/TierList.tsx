@@ -33,11 +33,10 @@ export const TierList = ({ tierList, stats, onHover }: TierListProps) => (
                     key={fraction}
                     onClick={() => onHover(fraction)}
                     className={styles.fractionButton}
-                    title={fraction}
                     aria-label={`Select ${fraction}`}
                   >
                     <GetFraction
-                      height="30vh"
+                      height="30px"
                       id={fraction}
                       img={true}
                       name={false}
