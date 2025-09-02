@@ -7,9 +7,12 @@ type DeleteObjectProps = {
 export const DeleteObject: React.FC<DeleteObjectProps> = ({ id }) => {
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/date/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://twilight-imperium-helper-api.onrender.com/date/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Ошибка при удалении данных");

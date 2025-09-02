@@ -1,14 +1,14 @@
 import { useState } from "react";
 interface AddObjectPayload {
-    date: string;
-    quantity: number;
-    set: PlayerData[];
-  }
-  interface PlayerData {
-    player: string;
-    fraction: number | null;
-    result: boolean;
-  }
+  date: string;
+  quantity: number;
+  set: PlayerData[];
+}
+interface PlayerData {
+  player: string;
+  fraction: number | null;
+  result: boolean;
+}
 export const useAddObjectAPI = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,11 +17,14 @@ export const useAddObjectAPI = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://localhost:5000/date", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "https://twilight-imperium-helper-api.onrender.com/date",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
       if (!res.ok) throw new Error("Network response was not OK");
     } catch (err: any) {
       setError(err.message ?? "Unknown error");

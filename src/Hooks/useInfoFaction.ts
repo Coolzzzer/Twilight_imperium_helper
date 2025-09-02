@@ -1,34 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export interface FactionResponse {
   id: number;
-  name: string;  
-  srcLogo:string;    
+  name: string;
+  srcLogo: string;
   srcInfo: string;
   srcToken: string;
 }
 export function useInfoFaction(initialId: number) {
   const [factionId, setFactionId] = useState<number>(initialId);
-  const [imgSrc, setImgSrc] = useState<string>('');
-  const [name, setName] = useState<string>('');  
-  const [srcLogo, setSrcLogo] = useState<string>('');  
+  const [imgSrc, setImgSrc] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [srcLogo, setSrcLogo] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchFaction = async (id: number): Promise<void> => {
     setLoading(true);
     try {
-      if(id==-1){
-        return
+      if (id == -1) {
+        return;
       }
-      const response = await fetch(`http://localhost:5000/initial/${id}`);
+      const response = await fetch(
+        `https://twilight-imperium-helper-api.onrender.com/initial/${id}`
+      );
       if (!response.ok) {
         throw new Error(`Ошибка при получении данных: ${response.statusText}`);
       }
       const data: FactionResponse = await response.json();
       setImgSrc(data.srcInfo);
       setName(data.name);
-      setSrcLogo(data.srcLogo)
+      setSrcLogo(data.srcLogo);
     } catch (err: any) {
       setError(err.message);
       console.error(err);
@@ -43,4 +45,3 @@ export function useInfoFaction(initialId: number) {
 
   return { imgSrc, name, srcLogo, loading, error, setFactionId };
 }
-

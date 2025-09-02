@@ -17,7 +17,9 @@ export const Tir = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:5000/date`);
+        const response = await fetch(
+          `https://twilight-imperium-helper-api.onrender.com/date`
+        );
         if (!response.ok) throw new Error(response.statusText);
         const raw = await response.json();
         setData(raw || []);

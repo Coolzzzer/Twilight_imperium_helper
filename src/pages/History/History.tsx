@@ -21,7 +21,9 @@ export const History: React.FC = () => {
   useEffect(() => {
     async function fetchHistory() {
       try {
-        const response = await fetch("http://localhost:5000/date");
+        const response = await fetch(
+          "https://twilight-imperium-helper-api.onrender.com/date"
+        );
         if (!response.ok) {
           throw new Error(
             `Ошибка при получении истории: ${response.statusText}`

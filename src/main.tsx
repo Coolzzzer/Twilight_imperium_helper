@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom"; // ← заменено
+
 import "./index.css";
 import { Menu } from "./pages/Menu/Menu";
 import { Statistics } from "./pages/Statistics/Statistics";
@@ -10,12 +11,11 @@ import { History } from "./pages/History/History";
 import { Tir } from "./pages/Tir/Tir";
 import { InputField } from "./pages/InputField/InputField";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Menu />,
     children: [
-      // { path: "main", element: <Main /> },
       { path: "statistics", element: <Statistics /> },
       { path: "info", element: <Info /> },
       { path: "inputField", element: <InputField save={true} /> },

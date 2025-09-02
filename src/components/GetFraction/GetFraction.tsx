@@ -28,7 +28,9 @@ export const GetFraction: React.FC<GetFractionProps> = ({
   useEffect(() => {
     async function fetchFactionById() {
       try {
-        const response = await fetch(`http://localhost:5000/initial/${id}`);
+        const response = await fetch(
+          `https://twilight-imperium-helper-api.onrender.com/initial/${id}`
+        );
         if (!response.ok) {
           throw new Error(
             `Ошибка при получении фракции: ${response.statusText}`
