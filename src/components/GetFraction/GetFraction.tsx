@@ -48,7 +48,7 @@ export const GetFraction: React.FC<GetFractionProps> = ({
     fetchFactionById();
   }, [id]);
 
-  if (loading) return <p className={styles.status}>Загрузка...</p>;
+  if (loading) return <p></p>;
   if (error) return <p className={styles.status}>{error}</p>;
 
   return (
