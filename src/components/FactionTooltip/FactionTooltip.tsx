@@ -29,11 +29,11 @@ export const FactionTooltip = ({
   <div
     style={{
       zIndex: 2,
-      width: "40vh",
-      padding: "1vh",
+      width: "25vw",
+      padding: "1vw",
       border: "1px solid black",
       position: "absolute",
-      borderRadius: "1vh",
+      borderRadius: "1vw",
       background: "#1a1a1a3f",
     }}
   >
@@ -43,6 +43,8 @@ export const FactionTooltip = ({
         img={true}
         name={true}
         imgToken={false}
+        height="1.5vw"
+        fontSize="1.5vw"
       />
     </b>
     <br />

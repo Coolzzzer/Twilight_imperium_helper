@@ -1,12 +1,12 @@
 .tierRow {
   display: flex;
   align-items: center;
-  padding: 0.2vh;
+  padding: 0.2vw;
   border-radius: 1vh;
 }
 
 .tierIcon {
-  width: 10vh;
+  width: 5vw;
   margin-right: 2vh;
 }
 .tierIconO {
@@ -22,9 +22,9 @@
 }
 
 .fractionButton {
-  height: 6vh;
-  width: 6vh;
-  padding: 1vh;
+  height: 5vw;
+  width: 5vw;
+  padding: 1vw;
   background-color: #030622;
   border: none;
   border-radius: 0.5vh;

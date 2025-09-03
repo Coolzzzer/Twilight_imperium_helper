@@ -92,6 +92,8 @@ export const History: React.FC = () => {
                           id={elem.fraction}
                           img={true}
                           name={true}
+                          fontSize="1vw"
+                          height="1vw"
                         />
                       </div>
                     ))}

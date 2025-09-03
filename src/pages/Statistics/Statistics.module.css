@@ -19,11 +19,11 @@
 }
 
 .toggleButton {
-  padding: 2vh;
-  font-size: 2vh;
+  padding: 1vw;
+  font-size: 1vw;
   background-color: #1a1f4a;
   border: none;
-  border-radius: 1vh;
+  border-radius: 1vw;
   cursor: pointer;
   transition: background-color 0.3s ease;
   color: #e0e0e0;

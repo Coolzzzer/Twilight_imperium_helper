@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-height: 100vh;
-  overflow-y: auto;
+  height: 90vh;
+  padding-right: 6vw;
 }
 
 .factionButton {
@@ -28,7 +28,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 10vh;
 }
 
 .status {
@@ -44,7 +43,7 @@
 }
 
 .factionImage {
-  max-height: 60vh;
+  max-height: 50vh;
   border-radius: 2vh;
   box-shadow: 0 0 2vh #5e5eff;
 }

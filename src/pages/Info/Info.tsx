@@ -21,7 +21,7 @@ export const Info: React.FC = () => {
       </div>
 
       <div className={styles.infoPanel}>
-        {loading && <p className={styles.status}>Загрузка...</p>}
+        {loading && <p className={styles.status}>{loading}</p>}
         {error && <p className={styles.status}>{error}</p>}
         {imgSrc && (
           <div className={styles.imageWrapper}>

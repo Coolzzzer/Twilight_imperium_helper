@@ -38,6 +38,7 @@ export const PlayerStatsBlock = ({
                   img={true}
                   name={false}
                   imgToken={false}
+                  height="2vw"
                 />
               )}
               <b>{player}</b>
@@ -67,7 +68,7 @@ export const PlayerStatsBlock = ({
                       ).map(([id, count]) => (
                         <span key={`win-${id}`} className={styles.factionStat}>
                           <GetFraction
-                            height="30px"
+                            height="2vw"
                             id={Number(id)}
                             img={true}
                             name={false}
@@ -89,7 +90,7 @@ export const PlayerStatsBlock = ({
                       ).map(([id, count]) => (
                         <span key={`lose-${id}`} className={styles.factionStat}>
                           <GetFraction
-                            height="30px"
+                            height="2vw"
                             id={Number(id)}
                             img={true}
                             name={false}
@@ -107,7 +108,7 @@ export const PlayerStatsBlock = ({
                   <div>
                     <h4>Любимая фракция:</h4>
                     <GetFraction
-                      height="30px"
+                      height="2vw"
                       id={Number(favoriteFactions[player])}
                       img={true}
                       name={false}
