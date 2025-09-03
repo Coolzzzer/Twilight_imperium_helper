@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 25%;
+  width: 40vw;
 }
 
 .grid {
@@ -32,6 +32,6 @@
 
 .tooltipWrapper {
   position: absolute;
-  left: 30vw;
+  left: 50vw;
   z-index: 10;
 }

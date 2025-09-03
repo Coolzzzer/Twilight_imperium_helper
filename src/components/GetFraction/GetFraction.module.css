@@ -2,12 +2,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 1vh;
+  gap: 0.2vw;
   flex-wrap: wrap;
 }
 
 .name {
-  margin: 2px;
+  margin-left: 0.1vw;
   color: #e0e0e0;
   font-weight: bold;
   text-align: center;

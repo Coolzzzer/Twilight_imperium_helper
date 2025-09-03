@@ -86,7 +86,7 @@ export const History: React.FC = () => {
                     <p>Количество участников: {item.quantity}</p>
                     {item.set.map((elem, index) => (
                       <div key={index} className={styles.participant}>
-                        <span>{elem.player}</span> —{" "}
+                        <span>{elem.player}</span> — {"    "}
                         <GetFraction
                           imgToken={false}
                           id={elem.fraction}
