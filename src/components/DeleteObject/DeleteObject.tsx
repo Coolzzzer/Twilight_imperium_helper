@@ -34,10 +34,10 @@ export const DeleteObject: React.FC<DeleteObjectProps> = ({ id }) => {
         style={{
           display: "flex",
           backgroundColor: "red",
-          padding: "1vh",
-          marginTop: "4vh",
-          borderRadius: "1vh",
-          width: "10vh",
+          padding: "1vw",
+          marginTop: "2vw",
+          borderRadius: "1vw",
+          width: "10vw",
           alignItems: "center",
           justifyContent: "center",
         }}
