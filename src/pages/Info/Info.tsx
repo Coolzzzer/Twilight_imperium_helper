@@ -21,7 +21,7 @@ export const Info: React.FC = () => {
               img={true}
               name={true}
               height="1.5vw"
-              fontSize="1vw"
+              fontSize="0.9vw"
             />
           </button>
         ))}
