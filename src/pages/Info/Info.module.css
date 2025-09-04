@@ -1,20 +1,18 @@
 .container {
-  display: flex;
-  padding: 2vh;
-  border-radius: 2vh;
 }
 
 .buttonPanel {
-  display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  height: 90vh;
-  padding-right: 6vw;
+  flex-wrap: nowrap;
+  gap: 1vw;
+  width: 96vw;
+  padding: 0.5vw 2vw;
 }
 
 .factionButton {
-  padding: 0.1vh;
-  margin: 0.1vh;
+  width: 19vw;
+  padding: 0.1vw;
+  margin: 0.1vw;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -32,18 +30,20 @@
 
 .status {
   color: #ccc;
-  font-size: 2vh;
-  margin-bottom: 2vh;
+  font-size: 2vw;
+  margin-bottom: 2vw;
 }
 
 .imageWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .factionImage {
-  max-height: 50vh;
-  border-radius: 2vh;
-  box-shadow: 0 0 2vh #5e5eff;
+  margin: auto;
+  width: 41vw;
+  border-radius: 2vw;
+  box-shadow: 0 0 2vw #5e5eff;
 }

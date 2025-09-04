@@ -15,7 +15,14 @@ export const Info: React.FC = () => {
             onClick={() => setFactionId(id)}
             className={styles.factionButton}
           >
-            <GetFraction imgToken={false} id={id} img={true} name={true} />
+            <GetFraction
+              imgToken={false}
+              id={id}
+              img={true}
+              name={true}
+              height="1.5vw"
+              fontSize="1vw"
+            />
           </button>
         ))}
       </div>
