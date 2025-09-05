@@ -5,24 +5,34 @@
   margin-top: 4vh;
 }
 .container {
-  display: flex;
   flex-direction: row;
   gap: 5vw;
   align-items: center;
 }
 .factionTooltip {
   display: flex;
+  position: absolute;
   align-items: center;
+  padding: 5vmax;
+  left: 50vw;
+  top: 10vmax;
+  width: 40vw;
 }
-@media (max-width: 680px) {
+.tierList {
+  font-size: 1vmax;
+}
+@media (max-width: 750px) {
   .container {
     display: block;
   }
   .factionTooltip {
-    padding: 5vmax;
     display: flex;
     align-items: start;
     justify-content: center;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 80vw;
   }
   .tierList {
     margin-left: 10vmin;

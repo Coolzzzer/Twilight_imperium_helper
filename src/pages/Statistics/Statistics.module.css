@@ -18,7 +18,7 @@
 }
 
 .toggleButton {
-  padding: 1vmax;
+  padding: 0.5vmax 1vmax;
   font-size: 1vmax;
   background-color: #1a1f4a;
   border: none;

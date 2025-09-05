@@ -3,7 +3,6 @@
   border-radius: 2vw;
   color: #e0e0e0;
   display: flex;
-  margin-left: 5vw;
 }
 
 .historyBlock {
@@ -11,7 +10,7 @@
 }
 
 .historyItem {
-  padding: 1vw;
+  padding: 0.5vmax 2vmax;
   margin: 0.5vw;
   display: flex;
   width: 100%;
@@ -20,7 +19,7 @@
   transition: background-color 0.3s ease;
   justify-content: center;
   align-items: center;
-  gap: 1vw;
+  gap: 2vmax;
   background-color: #0f0f49af;
 }
 
@@ -36,12 +35,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 20vw;
 }
 
 .winner {
   display: flex;
   align-items: center;
-  gap: 1vw;
+  gap: 1vmax;
 }
 
 .playerName {
@@ -62,7 +62,7 @@
   position: absolute;
   top: 0;
   left: 120%;
-  width: 40vmin;
+  width: 40vw;
   background-color: #030622;
   border-radius: 1vw;
   padding: 2vw;

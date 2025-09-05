@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60vmax;
 }
 
 .grid {
@@ -32,7 +31,7 @@
 
 .tooltipWrapper {
   position: relative;
-  margin-top: 2vmax;
+  margin-top: 1vmax;
   display: flex;
   height: 15vmax;
   justify-content: center;
