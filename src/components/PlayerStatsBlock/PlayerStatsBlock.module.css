@@ -47,7 +47,7 @@
 
 .tooltip {
   flex: 1 1 60vmin;
-  max-width: 80vmin;
+  max-width: 50vmin;
   padding: 2vmin;
   border: 0.3vmin solid #444;
   background: rgba(9, 17, 49, 0.6);
