@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FactionTooltip } from "../../components/FactionTooltip/FactionTooltip";
 import { TierList } from "../../components/TierList/TierList";
+import styles from "./Tir.module.css";
 import {
   generateFactionStats,
   generateTierList,
@@ -39,21 +40,15 @@ export const Tir = () => {
     setTierList(generateTierList(fs));
   }, [data]);
 
-  if (loading) return <p>Загрузка...</p>;
-  if (error) return <p>Ошибка: {error}</p>;
+  if (loading) return <p className={styles.status}>Загрузка...</p>;
+  if (error) return <p className={styles.status}>Ошибка: {error}</p>;
 
   return (
     <>
       <h1>Тир-лист фракций:</h1>
       за <b>{data.length}</b> партий
       {hoveredFraction && (
-        <div
-          style={{
-            position: "absolute",
-            top: "20vw",
-            left: "55vw",
-          }}
-        >
+        <div className={styles.container}>
           <FactionTooltip
             fraction={hoveredFraction}
             stats={factionStats[hoveredFraction]}

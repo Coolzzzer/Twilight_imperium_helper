@@ -17,6 +17,8 @@ type HistoryResponse = {
 export const History: React.FC = () => {
   const [history, setHistory] = useState<HistoryResponse[]>([]);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchHistory() {
@@ -36,12 +38,15 @@ export const History: React.FC = () => {
           )
         );
       } catch (err: any) {
-        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     }
     fetchHistory();
   }, []);
-
+  if (loading) return <p className={styles.status}>Загрузка...</p>;
+  if (error) return <p className={styles.status}>Ошибка: {error}</p>;
   return (
     <div className={styles.container}>
       <div>
@@ -104,7 +109,7 @@ export const History: React.FC = () => {
             );
           })
         ) : (
-          <p className={styles.noData}>Записей не найдено</p>
+          <p className={styles.status}>Записей не найдено</p>
         )}
       </div>
     </div>

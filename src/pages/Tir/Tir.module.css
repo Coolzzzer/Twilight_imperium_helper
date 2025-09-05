@@ -1,0 +1,11 @@
+.status {
+  font-size: 2.5vh;
+  color: #ff6b6b;
+  text-align: center;
+  margin-top: 4vh;
+}
+.conteiner {
+  position: "absolute";
+  top: "20vw";
+  left: "55vw";
+}
