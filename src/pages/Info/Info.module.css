@@ -1,27 +1,46 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.containerButtonPanel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1vmax;
 }
 
 .buttonPanel {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.4vmax;
+  flex-wrap: wrap;
+}
+
+.column {
+  display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 1vw;
-  width: 96vw;
-  padding: 0.5vw 2vw;
+  align-items: center;
+  gap: 0.2vmax;
 }
 
 .factionButton {
-  width: 19vw;
-  padding: 0.1vw;
-  margin: 0.1vw;
+  width: 19vmax;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
 }
 
 .factionButton:hover {
-  box-shadow: 0 0 1vh #5e5eff;
+  box-shadow: 0 0 1vmax #5e5eff;
 }
 
 .infoPanel {
+  margin: 2vmax;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,8 +62,7 @@
 }
 
 .factionImage {
-  margin: auto;
-  width: 41vw;
-  border-radius: 2vw;
-  box-shadow: 0 0 2vw #5e5eff;
+  width: 40vmax;
+  border-radius: 2vmax;
+  box-shadow: 0 0 2vmax #5e5eff;
 }

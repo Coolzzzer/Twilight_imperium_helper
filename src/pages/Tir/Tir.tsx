@@ -45,22 +45,26 @@ export const Tir = () => {
 
   return (
     <>
-      <h1>Тир-лист фракций:</h1>
-      за <b>{data.length}</b> партий
-      {hoveredFraction && (
-        <div className={styles.container}>
-          <FactionTooltip
-            fraction={hoveredFraction}
-            stats={factionStats[hoveredFraction]}
-            onClose={() => setHoveredFraction(null)}
+      <div className={styles.container}>
+        <div className={styles.tierList}>
+          <h1>Тир-лист фракций:</h1>
+          за <b>{data.length}</b> партий
+          <TierList
+            tierList={tierList}
+            stats={factionStats}
+            onHover={setHoveredFraction}
           />
         </div>
-      )}
-      <TierList
-        tierList={tierList}
-        stats={factionStats}
-        onHover={setHoveredFraction}
-      />
+        {hoveredFraction && (
+          <div className={styles.factionTooltip}>
+            <FactionTooltip
+              fraction={hoveredFraction}
+              stats={factionStats[hoveredFraction]}
+              onClose={() => setHoveredFraction(null)}
+            />
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -1,22 +1,22 @@
 .container {
   position: relative;
-  padding: 2vh;
+  padding: 2vmax;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40vw;
+  height: 60vmax;
 }
 
 .grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1vh;
+  gap: 1vmax;
   justify-content: center;
 }
 
 .fractionButton {
-  height: 5vw;
-  width: 5vw;
+  height: 5vmax;
+  width: 5vmax;
   padding: 0.5vw;
   background-color: #030622;
   border: none;
@@ -31,7 +31,10 @@
 }
 
 .tooltipWrapper {
-  position: absolute;
-  left: 50vw;
+  position: relative;
+  margin-top: 2vmax;
+  display: flex;
+  height: 15vmax;
+  justify-content: center;
   z-index: 10;
 }

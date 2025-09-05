@@ -2,29 +2,39 @@ import React from "react";
 import { useInfoFaction } from "../../Hooks/useInfoFaction";
 import { GetFraction } from "../../components/GetFraction/GetFraction";
 import styles from "./Info.module.css";
+
 export const Info: React.FC = () => {
   const { imgSrc, name, loading, error, setFactionId } = useInfoFaction(-1);
   const buttons = Array.from({ length: 25 }, (_, i) => i);
+  const columns = Array.from({ length: 5 }, (_, colIndex) =>
+    buttons.slice(colIndex * 5, colIndex * 5 + 5)
+  );
 
   return (
     <div className={styles.container}>
-      <div className={styles.buttonPanel}>
-        {buttons.map((id) => (
-          <button
-            key={id}
-            onClick={() => setFactionId(id)}
-            className={styles.factionButton}
-          >
-            <GetFraction
-              imgToken={false}
-              id={id}
-              img={true}
-              name={true}
-              height="1.5vw"
-              fontSize="0.9vw"
-            />
-          </button>
-        ))}
+      <div className={styles.containerButtonPanel}>
+        <div className={styles.buttonPanel}>
+          {columns.map((group, colIndex) => (
+            <div key={colIndex} className={styles.column}>
+              {group.map((id) => (
+                <button
+                  key={id}
+                  onClick={() => setFactionId(id)}
+                  className={styles.factionButton}
+                >
+                  <GetFraction
+                    imgToken={false}
+                    id={id}
+                    img={true}
+                    name={true}
+                    height="1.5vmax"
+                    fontSize="0.9vmax"
+                  />
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className={styles.infoPanel}>

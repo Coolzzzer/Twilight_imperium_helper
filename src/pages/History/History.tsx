@@ -77,6 +77,7 @@ export const History: React.FC = () => {
                             id={winner.fraction}
                             img={true}
                             name={false}
+                            height="1.5vw"
                           />
                         </div>
                       ))}
@@ -88,17 +89,20 @@ export const History: React.FC = () => {
 
                 {isExpanded && (
                   <div className={styles.details}>
-                    <p>Количество участников: {item.quantity}</p>
+                    <p className={styles.players}>
+                      Количество участников: {item.quantity}
+                    </p>
                     {item.set.map((elem, index) => (
                       <div key={index} className={styles.participant}>
-                        <span>{elem.player}</span> — {"    "}
+                        <span className={styles.player}>{elem.player}</span> —{" "}
+                        {"    "}
                         <GetFraction
                           imgToken={false}
                           id={elem.fraction}
                           img={true}
                           name={true}
-                          fontSize="1vw"
-                          height="1vw"
+                          fontSize="1.5vmin"
+                          height="1.5vmin"
                         />
                       </div>
                     ))}

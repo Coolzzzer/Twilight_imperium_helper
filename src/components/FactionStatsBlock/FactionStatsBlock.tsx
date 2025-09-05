@@ -29,7 +29,7 @@ export const FactionStatsBlock = ({ factionStats }: FactionStatsBlockProps) => {
             title={`Фракция ${fraction}`}
           >
             <GetFraction
-              height="3vw"
+              height="3vmax"
               id={fraction}
               img={true}
               name={false}

@@ -1,16 +1,21 @@
 .container {
   position: relative;
-  width: 30vw;
+  width: auto;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1vmax;
+  height: auto;
 }
 
 .playerButton {
-  width: 12vw;
-  height: 3vw;
+  width: 12vmax;
+  height: 3vmax;
   justify-content: center;
+  font-size: 1vmax;
   padding: 5px;
-  background-color: #030622;
+  background-color: #0306228c;
   margin: 2px;
   border: none;
   border-radius: 0.5vh;
@@ -25,30 +30,23 @@
 .playerButton:hover {
   background-color: #2c3370;
 }
-
+.containerTooltip {
+  position: absolute;
+  display: flex;
+  align-items: start;
+  left: 0;
+  width: 100vw;
+}
 .tooltip {
   z-index: 2;
-  width: 50vw;
+  width: auto;
   padding: 1vw;
   border: 1px solid #444;
   position: absolute;
-  top: 0;
-  left: 35vw;
-  background: #1a1a1a;
+  background: #09113186;
   border-radius: 1vw;
   box-shadow: 0 0 1vw #5e5eff;
   animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-1vh);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .factionStat {

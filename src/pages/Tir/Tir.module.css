@@ -4,8 +4,27 @@
   text-align: center;
   margin-top: 4vh;
 }
-.conteiner {
-  position: "absolute";
-  top: "20vw";
-  left: "55vw";
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 5vw;
+  align-items: center;
+}
+.factionTooltip {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 680px) {
+  .container {
+    display: block;
+  }
+  .factionTooltip {
+    padding: 5vmax;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+  }
+  .tierList {
+    margin-left: 10vmin;
+  }
 }

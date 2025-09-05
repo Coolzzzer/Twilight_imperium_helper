@@ -1,5 +1,5 @@
 .container {
-  padding: 3vh;
+  padding: 1vmax;
   border-radius: 2vh;
   color: #e0e0e0;
 }
@@ -13,14 +13,13 @@
 
 .toggle {
   display: flex;
-  gap: 2vh;
-  margin-bottom: 3vh;
+  gap: 2vmax;
   justify-content: center;
 }
 
 .toggleButton {
-  padding: 1vw;
-  font-size: 1vw;
+  padding: 1vmax;
+  font-size: 1vmax;
   background-color: #1a1f4a;
   border: none;
   border-radius: 1vw;

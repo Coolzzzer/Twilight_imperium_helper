@@ -6,11 +6,11 @@
 }
 
 .tierIcon {
-  width: 5vw;
+  width: 5vmax;
   margin-right: 2vh;
 }
 .tierIconO {
-  margin-top: 5vh;
+  margin-top: 2vmax;
 }
 .factionGroup {
   display: flex;
@@ -18,13 +18,13 @@
   gap: 1vh;
 }
 .factionGroupO {
-  margin-top: 5vh;
+  margin-top: 2vmax;
 }
 
 .fractionButton {
-  height: 5vw;
-  width: 5vw;
-  padding: 1vw;
+  height: 5vmax;
+  width: 5vmax;
+  padding: 1vmax;
   background-color: #030622;
   border: none;
   border-radius: 0.5vh;

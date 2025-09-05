@@ -62,11 +62,17 @@
   position: absolute;
   top: 0;
   left: 120%;
-  width: 100%;
+  width: 40vmin;
   background-color: #030622;
   border-radius: 1vw;
   padding: 2vw;
   box-shadow: 0 0 1vh #5e5eff;
+}
+.players {
+  font-size: 2vmin;
+}
+.player {
+  font-size: 1.5vmin;
 }
 
 .participant {

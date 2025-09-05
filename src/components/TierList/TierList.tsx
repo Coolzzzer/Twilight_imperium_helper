@@ -36,7 +36,7 @@ export const TierList = ({ tierList, stats, onHover }: TierListProps) => (
                     aria-label={`Select ${fraction}`}
                   >
                     <GetFraction
-                      height="2.5vw"
+                      height="2.5vmax"
                       id={Number(fraction)}
                       img={true}
                       name={false}
