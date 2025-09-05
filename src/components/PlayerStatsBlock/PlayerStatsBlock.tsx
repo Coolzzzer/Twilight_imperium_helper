@@ -22,119 +22,143 @@ export const PlayerStatsBlock = ({
 }: PlayerStatsBlockProps) => {
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
 
+  const sortedPlayers = Object.entries(playerStats).sort(
+    ([, a], [, b]) => b.wins + b.losses - (a.wins + a.losses)
+  );
+
   return (
     <div className={styles.container}>
-      {Object.entries(playerStats)
-        .sort(([, a], [, b]) => b.wins + b.losses - (a.wins + a.losses))
-        .map(([player, stats]) => (
-          <div key={player} className={styles.playerBlock}>
+      {/* Все игроки */}
+      {sortedPlayers.map(([player]) => (
+        <div key={player} className={styles.playerBlock}>
+          <button
+            onClick={() => setSelectedPlayer(player)}
+            className={styles.playerButton}
+          >
+            {favoriteFactions[player] !== "нет" && (
+              <GetFraction
+                id={Number(favoriteFactions[player])}
+                img={true}
+                name={false}
+                imgToken={false}
+                height="1.5vmax"
+              />
+            )}
+            <b>{player}</b>
+          </button>
+        </div>
+      ))}
+
+      {/* Выбранный игрок внизу */}
+      {selectedPlayer && (
+        <div className={styles.selectedRow}>
+          <div className={styles.playerBlock}>
             <button
-              onClick={() => setSelectedPlayer(player)}
+              onClick={() => setSelectedPlayer(null)}
               className={styles.playerButton}
             >
-              {favoriteFactions[player] !== "нет" && (
+              {favoriteFactions[selectedPlayer] !== "нет" && (
                 <GetFraction
-                  id={Number(favoriteFactions[player])}
+                  id={Number(favoriteFactions[selectedPlayer])}
                   img={true}
                   name={false}
                   imgToken={false}
                   height="1.5vmax"
                 />
               )}
-              <b>{player}</b>
+              <b>{selectedPlayer}</b>
             </button>
-            {selectedPlayer === player && (
-              <div className={styles.containerTooltip}>
-                <div className={styles.tooltip}>
-                  <h2>{player}</h2>
-                  <div>
-                    Процент побед:{" "}
-                    {stats.wins + stats.losses > 0
-                      ? Math.round(
-                          (stats.wins / (stats.wins + stats.losses)) * 100
-                        )
-                      : "—"}
-                    %
-                  </div>
-                  <div>
-                    {stats.wins + stats.losses} партий, {stats.wins} побед,{" "}
-                    {stats.losses} поражений
-                  </div>
+          </div>
 
-                  <div>
-                    <h4>Победы на:</h4>
-                    {playerFactionResults[player]?.wins.length > 0
-                      ? Object.entries(
-                          countFactions(playerFactionResults[player].wins)
-                        ).map(([id, count]) => (
-                          <span
-                            key={`win-${id}`}
-                            className={styles.factionStat}
-                          >
-                            <GetFraction
-                              height="3vmin"
-                              id={Number(id)}
-                              img={true}
-                              name={false}
-                              imgToken={false}
-                            />
-                            {count > 1 && (
-                              <span className={styles.count}>×{count}</span>
-                            )}
-                          </span>
-                        ))
-                      : "—"}
-                  </div>
+          <div className={styles.tooltip}>
+            <h2>{selectedPlayer}</h2>
+            <div>
+              Процент побед:{" "}
+              {playerStats[selectedPlayer].wins +
+                playerStats[selectedPlayer].losses >
+              0
+                ? Math.round(
+                    (playerStats[selectedPlayer].wins /
+                      (playerStats[selectedPlayer].wins +
+                        playerStats[selectedPlayer].losses)) *
+                      100
+                  )
+                : "—"}
+              %
+            </div>
+            <div>
+              {playerStats[selectedPlayer].wins +
+                playerStats[selectedPlayer].losses}{" "}
+              партий, {playerStats[selectedPlayer].wins} побед,{" "}
+              {playerStats[selectedPlayer].losses} поражений
+            </div>
 
-                  <div>
-                    <h4>Поражения на:</h4>
-                    {playerFactionResults[player]?.loses.length > 0
-                      ? Object.entries(
-                          countFactions(playerFactionResults[player].loses)
-                        ).map(([id, count]) => (
-                          <span
-                            key={`lose-${id}`}
-                            className={styles.factionStat}
-                          >
-                            <GetFraction
-                              height="3vmin"
-                              id={Number(id)}
-                              img={true}
-                              name={false}
-                              imgToken={false}
-                            />
-                            {count > 1 && (
-                              <span className={styles.count}>×{count}</span>
-                            )}
-                          </span>
-                        ))
-                      : "—"}
-                  </div>
-
-                  {favoriteFactions[player] !== "нет" && (
-                    <div>
-                      <h4>Любимая фракция:</h4>
+            <div>
+              <h4>Победы на:</h4>
+              {playerFactionResults[selectedPlayer]?.wins.length > 0
+                ? Object.entries(
+                    countFactions(playerFactionResults[selectedPlayer].wins)
+                  ).map(([id, count]) => (
+                    <span key={`win-${id}`} className={styles.factionStat}>
                       <GetFraction
-                        height="2vmax"
-                        id={Number(favoriteFactions[player])}
+                        height="3vmin"
+                        id={Number(id)}
                         img={true}
                         name={false}
                         imgToken={false}
                       />
-                    </div>
-                  )}
+                      {count > 1 && (
+                        <span className={styles.count}>×{count}</span>
+                      )}
+                    </span>
+                  ))
+                : "—"}
+            </div>
 
-                  <button
-                    onClick={() => setSelectedPlayer(null)}
-                    className={styles.closeButton}
-                  >
-                    Закрыть
-                  </button>
-                </div>
+            <div>
+              <h4>Поражения на:</h4>
+              {playerFactionResults[selectedPlayer]?.loses.length > 0
+                ? Object.entries(
+                    countFactions(playerFactionResults[selectedPlayer].loses)
+                  ).map(([id, count]) => (
+                    <span key={`lose-${id}`} className={styles.factionStat}>
+                      <GetFraction
+                        height="3vmin"
+                        id={Number(id)}
+                        img={true}
+                        name={false}
+                        imgToken={false}
+                      />
+                      {count > 1 && (
+                        <span className={styles.count}>×{count}</span>
+                      )}
+                    </span>
+                  ))
+                : "—"}
+            </div>
+
+            {favoriteFactions[selectedPlayer] !== "нет" && (
+              <div>
+                <h4>Любимая фракция:</h4>
+                <GetFraction
+                  height="2vmax"
+                  id={Number(favoriteFactions[selectedPlayer])}
+                  img={true}
+                  name={false}
+                  imgToken={false}
+                />
               </div>
             )}
+
+            <button
+              onClick={() => setSelectedPlayer(null)}
+              className={styles.closeButton}
+            >
+              Закрыть
+            </button>
           </div>
-        ))}
+        </div>
+      )}
     </div>
   );
 };
